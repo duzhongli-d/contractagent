@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LegalEdge AI
+
+AI-powered contract analysis SaaS. Upload PDF contracts and get instant legal insights, risks, and recommendations powered by OpenAI's Assistants API.
+
+## Features
+
+- **AI Contract Analysis** - Upload contracts and receive detailed analysis with identified risks and recommendations
+- **Multi-language Support** - Available in English, Chinese, and Norwegian
+- **Token-based Pricing** - Pay only for what you use (2 NOK per token)
+- **Secure Authentication** - Powered by Clerk
+- **Stripe Integration** - Purchase tokens securely
+
+## Tech Stack
+
+- **Framework**: Next.js 16 with App Router and TypeScript
+- **AI**: OpenAI Assistants API
+- **Database**: Appwrite
+- **Auth**: Clerk
+- **Payments**: Stripe
+- **Analytics**: PostHog
+- **Styling**: Tailwind CSS with shadcn/ui components
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm run start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit http://localhost:3000 after starting the dev server.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.example.env` to `.env.local` and configure:
 
-## Learn More
+```bash
+# OpenAI
+OPENAI_API_KEY=
+OPENAI_ASSISTANT_ID=
+OPENAI_PREMIUM_ASSISTANT_ID=
 
-To learn more about Next.js, take a look at the following resources:
+# Clerk
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Appwrite
+NEXT_PUBLIC_APPWRITE_ENDPOINT=
+NEXT_PUBLIC_APPWRITE_PROJECT_ID=
+NEXT_PUBLIC_APPWRITE_DATABASE_ID=
+NEXT_PUBLIC_APPWRITE_COLLECTION_ID=
+APPWRITE_SECRET_KEY=
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# Stripe
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+STRIPE_SECRET_KEY=
+STRIPE_WEBHOOK_SECRET=
+```
 
-## Deploy on Vercel
+## Project Structure
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+app/                    # Next.js App Router
+├── actions/           # Server Actions
+├── api/               # API Routes
+├── (locale)/          # i18n routes
+config/               # App constants
+components/           # React components
+context/              # React context providers
+lib/                  # Utilities and i18n
+locales/              # Translation files
+utils/                # Helper functions
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+Private - All rights reserved
