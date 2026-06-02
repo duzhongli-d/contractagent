@@ -10,7 +10,7 @@ import { currentUser } from '@clerk/nextjs/server';
 import { Query } from 'node-appwrite';
 import { TOKENS_PER_QUERY } from '@/config';
 import PostHogClient from '@/posthog';
-import { openai } from '@/lib/openai';
+import { openai } from '@/openai';
 
 // Constants for file validation
 const ALLOWED_FILE_TYPES = ['application/pdf'];
