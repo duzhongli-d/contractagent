@@ -1,0 +1,426 @@
+{
+  "localeNames": {
+    "en": "English",
+    "zh": "中文",
+    "nb": "Norsk"
+  },
+  "nav": {
+    "home": "Home",
+    "upload": " Upload",
+    "liveAnalyser": "Live Analyser",
+    "buyTokens": "Buy Tokens",
+    "contact": "Contact",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "openMenu": "Open menu"
+  },
+  "hero": {
+    "title": "AI-Powered Legal Contract Analysis",
+    "subtitle": "Faster. Smarter. More Reliable.",
+    "description": "Save hours on manual review. Let AI identify legal risks and flag potential problems in contracts instantly.",
+    "analyzeButton": "Analyze Contract",
+    "viewDemo": "View Demo",
+    "trustIndicators": {
+      "secure": "Secure & Reliable",
+      "fast": "Fast Response",
+      "ai": "AI-Powered",
+      "ready": "AI Ready"
+    }
+  },
+  "howItWorks": {
+    "title": "Simple Process",
+    "heading": "How It Works",
+    "description": "Our AI-driven platform simplifies legal document verification in three easy steps.",
+    "step1": {
+      "title": "1. Upload Document",
+      "description": "Easily upload your legal documents through our secure platform."
+    },
+    "step2": {
+      "title": "2. AI Analysis",
+      "description": "Our AI scans and analyzes the document for potential legal risks."
+    },
+    "step3": {
+      "title": "3. Receive Report",
+      "description": "Get a detailed analysis report with flagged issues in minutes."
+    }
+  },
+  "disclaimer": {
+    "title": "This website is a demo.",
+    "warning1": "No information about contracts is stored, but OpenAI may use the data to improve its service. Please do not upload sensitive or confidential documents.",
+    "warning2": "No claims about the accuracy or reliability of the analyses are real, tested, or valid."
+  },
+  "disclaimerModal": {
+    "title": "Disclaimer",
+    "description": "This contract analysis service is a <strong>demonstration tool</strong> and is <strong>not intended for use in real situations</strong>.",
+    "items": {
+      "noSensitive": "Do not upload sensitive, confidential, or legally binding documents.",
+      "automatedAnalysis": "The analysis is automated and may contain inaccuracies.",
+      "noLegalAdvice": "This service <strong>does not replace</strong> professional legal advice.",
+      "noLiability": "The provider assumes <strong>no liability</strong> for the use of this tool."
+    },
+    "checkbox": "I understand and accept these terms.",
+    "cancel": "Cancel",
+    "accept": "Accept and Continue"
+  },
+  "demoBanner": {
+    "title": "Demo Project",
+    "description": "This is a demonstration and cannot be used for legal purposes or in production.",
+    "close": "Close"
+  },
+  "common": {
+    "loading": "Loading..."
+  },
+  "features": {
+    "title": "Powerful Features",
+    "heading": "Key Features",
+    "description": "Our AI-driven platform offers comprehensive analysis of legal documents with these key features.",
+    "items": {
+      "riskIdentification": {
+        "title": "Risk Identification",
+        "description": "AI flags clauses with potential legal risks, highlighting areas that need attention."
+      },
+      "contextualInsights": {
+        "title": "Context-Aware Insights",
+        "description": "Highlights vague or problematic phrasing with contextual understanding of legal language."
+      },
+      "speedAccuracy": {
+        "title": "Speed and Accuracy",
+        "description": "Analyzes contracts in seconds, reducing human workload while maintaining high accuracy."
+      },
+      "customizable": {
+        "title": "Customizable Reviews",
+        "description": "Set specific parameters to match your law firm's requirements and standards."
+      },
+      "secure": {
+        "title": "Secure and Confidential",
+        "description": "End-to-end encryption to protect sensitive documents and client information."
+      },
+      "integration": {
+        "title": "Integration-Ready",
+        "description": "Seamlessly integrates with your existing legal software and document management systems."
+      }
+    }
+  },
+  "whyChoose": {
+    "title": "Competitive Advantages",
+    "heading": "Why Choose Our AI?",
+    "description": "See how our AI-driven solution compares to traditional manual review processes.",
+    "timeSavings": "Time Savings",
+    "costEffectiveness": "Cost Effectiveness",
+    "traditional": {
+      "title": "Traditional Review",
+      "description": "A 50-page contract takes an average of 5-7 hours for manual review by a legal professional.",
+      "timeValue": "5-7 hours",
+      "costDescription": "Average cost of 3000-5000 kr per hour for review by a lawyer clerk.",
+      "costValue": "15,000-35,000 kr",
+      "costPeriod": "Per contract"
+    },
+    "ai": {
+      "title": "AI-Driven Review",
+      "description": "Our AI analyzes the same 50-page contract in minutes, with human review only for flagged issues.",
+      "timeValue": "15-30 minutes",
+      "costDescription": "Subscription-based pricing with unlimited document analysis.",
+      "costValue": "2,000-4,000 kr",
+      "costPeriod": "Per month, unlimited contracts"
+    },
+    "testimonials": {
+      "title": "What Our Early Users Say",
+      "reviews": [
+        {
+          "name": "Halo Chen",
+          "role": "Managing Partner, Donovan Legal",
+          "comment": "This AI tool has transformed our contract review process. What used to take days now takes hours, allowing our lawyers to focus on higher-value work."
+        },
+        {
+          "name": "Isabelle Tang",
+          "role": "Legal Operations Director, Global Corp",
+          "comment": "The accuracy in risk identification has been impressive. We've caught several critical issues that could have been overlooked in our standard review process."
+        }
+      ]
+    }
+  },
+  "cta": {
+    "title": "Ready to Transform Your Legal Document Review?",
+    "description": "Join leading law firms already saving hundreds of hours on contract review.",
+    "tryAnalysis": "Try Your First Analysis",
+    "viewDemo": "View Demo"
+  },
+  "faq": {
+    "title": "Common Questions",
+    "heading": "Frequently Asked Questions",
+    "description": "Find answers to common questions about our AI-powered legal document verification.",
+    "questions": {
+      "accuracy": {
+        "question": "How accurate is the AI at identifying legal risks?",
+        "answer": "Our AI has been trained on millions of legal documents and achieves over 98% accuracy in identifying common legal risks and issues. The system continuously improves through machine learning and feedback from legal professionals."
+      },
+      "security": {
+        "question": "Are my data secure and confidential?",
+        "answer": "Absolutely. We use end-to-end encryption and strict data security protocols. Your documents are never permanently stored, and we comply with all relevant data protection regulations including GDPR. We also offer on-premise deployment options for firms with stricter security requirements."
+      },
+      "documentTypes": {
+        "question": "What types of legal documents can the AI analyze?",
+        "answer": "Our AI can analyze a wide range of legal documents including contracts, NDAs, employment agreements, lease agreements, terms of service, privacy policies, and more. The system is particularly effective with standardized legal documents but can also handle customized agreements."
+      },
+      "jurisdictions": {
+        "question": "How does the AI handle different jurisdictions?",
+        "answer": "The AI has been trained on legal documents from multiple jurisdictions including Chinese laws,US federal and state laws, EU regulations, and UK law. You can specify the relevant jurisdiction when uploading documents, and the AI will apply the appropriate legal standards and considerations."
+      },
+      "replacement": {
+        "question": "Can the AI replace our legal team?",
+        "answer": "No, our AI is designed to supplement your legal team, not replace it. The AI handles the time-consuming initial review and flags potential issues, allowing your legal professionals to focus their expertise on analysis, strategy, and client consultation. It's a tool that makes your legal team more efficient and effective."
+      },
+      "integrations": {
+        "question": "What integrations are available?",
+        "answer": "Our platform integrates with popular legal document management systems including Clio, DocuSign, iManage, and NetDocuments. We also offer API access for custom integrations with your existing workflows and systems."
+      }
+    }
+  },
+  "footer": {
+    "description": "AI-powered legal document verification platform helping legal professionals save time and reduce risks.",
+    "quickLinks": "Quick Links",
+    "company": "Company",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact",
+    "copyright": "All Rights Reserved",
+    "pricing": "Pricing",
+    "caseStudies": "Case Studies",
+    "documentation": "Documentation",
+    "aboutUs": "About Us",
+    "blog": "Blog",
+    "careers": "Careers",
+    "security": "Security",
+    "compliance": "Compliance"
+  },
+  "liveAnalyser": {
+    "title": "Contract Analysis",
+    "subtitle": "AI-powered analysis of legal documents",
+    "upload": {
+      "title": "Upload contract for analysis",
+      "description": "Upload your legal document for AI analysis",
+      "selectFile": "Select file",
+      "analyzing": "Analyzing...",
+      "analyze": "Analyze",
+      "disclaimer": "Disclaimer",
+      "selectFileAlert": "Please select a file first.",
+      "acceptDisclaimerAlert": "Please accept the disclaimer first."
+    },
+    "results": {
+      "title": "Document Analysis Results",
+      "subtitle": "AI-generated analysis of your legal document",
+      "error": "Error",
+      "risks": "potential risks identified",
+      "suggestions": "suggested changes",
+      "unusual": "unusual clause detected",
+      "totalAnalyzed": "Total analyzed",
+      "pages": "pages",
+      "words": "words",
+      "documentTab": "Document Content",
+      "feedbackTab": "Detailed Feedback",
+      "risk": "Risk",
+      "suggestion": "Suggestion",
+      "unusualClause": "Unusual Clause",
+      "section": "Section",
+      "downloadReport": "Download Report",
+      "uploadNew": "Upload New Document"
+    },
+    "disclaimerModal": {
+      "title": "Disclaimer",
+      "description": "This contract analysis service is a <strong>demonstration tool</strong> and is <strong>not intended for use in real situations</strong>.",
+      "items": {
+        "noSensitive": "Do not upload sensitive, confidential, or legally binding documents.",
+        "automatedAnalysis": "The analysis is automated and may contain inaccuracies.",
+        "noLegalAdvice": "This service <strong>does not replace</strong> professional legal advice.",
+        "noLiability": "The provider assumes <strong>no liability</strong> for the use of this tool."
+      },
+      "checkbox": "I understand and accept these terms.",
+      "cancel": "Cancel",
+      "accept": "Accept and Continue"
+    }
+  },
+  "buytokens": {
+    "title": "Buy Tokens",
+    "subtitle": "Need more documents analyzed, or want to try our premium model?",
+    "backHome": "Back to Home",
+    "orderSummary": "Order Summary",
+    "tokensPrice": "Tokens ({price} NOK each)",
+    "volumeDiscount": "Volume Discount",
+    "total": "Total",
+    "securePayment": "Secure payment processing",
+    "completePurchase": "Complete your purchase",
+    "redirectStripe": "You will be redirected to Stripe to complete the purchase.",
+    "payWith": "Pay with Visa, Mastercard or other payment methods",
+    "minimumAmountError": "Minimum amount is 6 NOK",
+    "redirectingToStripe": "Redirecting to Stripe...",
+    "checkoutWithStripe": "Checkout with Stripe • {amount} NOK",
+    "redirectedSecureCheckout": "You'll be redirected to Stripe's secure checkout page to complete your purchase.",
+    "securePaymentProcessing": "Secure payment processing",
+    "noDataStored": "No data is stored with us.",
+    "supportPaymentMethods": "Support for all major payment methods",
+    "perUnit": "per unit",
+    "tokens": "Tokens",
+    "tokenSelector": {
+      "title": "Select Token Amount",
+      "description": "Select how many tokens you want to buy. Each Token costs 2 NOK",
+      "subtotal": "Subtotal",
+      "tokensXPrice": "tokens × price",
+      "volumeDiscount": "Volume Discount",
+      "discountOf": "discount",
+      "totalPrice": "Total Price",
+      "discountIncluded": "discount included",
+      "tokens": "Tokens",
+      "perDocument": "and allows you to analyze one document."
+    },
+    "success": {
+      "title": "Payment Successful!",
+      "subtitle": "Payment processed through Stripe",
+      "thankYou": "Thank you for your purchase",
+      "tokensBought": "You have purchased",
+      "basePrice": "Base price",
+      "totalPaid": "Total paid",
+      "orderDetails": "Order Details",
+      "orderId": "Order ID",
+      "date": "Date",
+      "paymentMethod": "Payment Method",
+      "goToAnalysis": "Go to Analysis Page",
+      "goToHome": "Go to Homepage"
+    },
+    "error": {
+      "missingSession": "Missing session ID",
+      "provideSession": "Please provide a valid session_id",
+      "goBack": "Go back to purchase page"
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Have questions about the platform or anything else relevant? We will answer as best we can.",
+    "email": "Email",
+    "support": "Support",
+    "sales": "Sales",
+    "phone": "Phone",
+    "phoneUnavailable": "+86 180 1792 6742",
+    "hours": "Monday - Friday, 09:00 - 17:00",
+    "sendMessage": "Send us a message",
+    "fillForm": "Fill out the form below and we will get back to you as soon as possible.",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "emailField": "Email",
+    "phoneOptional": "Phone (Optional)",
+    "inquiryType": "Type of Inquiry",
+    "selectInquiry": "Select a type of inquiry",
+    "general": "General Inquiry",
+    "supportOption": "Technical Support",
+    "billingOption": "Billing",
+    "partnership": "Partnership",
+    "message": "Message",
+    "placeholderMessage": "How can we help you?",
+    "send": "Send Message",
+    "availability": "Availability",
+    "availabilityDesc": "We are available to answer phone or email during the following hours:",
+    "weekdays": "Monday - Friday",
+    "time": "9:00 - 17:00",
+    "urgent": "For time-sensitive matters outside business hours, send an email to eric.du@halooffice.com with \"URGENT\" in the subject line and we will respond as soon as we can.",
+    "success": "Your message has been sent!",
+    "error": "Something went wrong. Please try again later."
+  },
+  "upload": {
+    "title": "Upload Document",
+    "subtitle": "Upload your legal document for AI analysis",
+    "document": "Document",
+    "analyzing": "Analyzing document... {progress}%",
+    "startAnalysis": "Start Analysis"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last Updated: Feb. 02, 2026",
+      "introduction": "Introduction",
+      "introductionText": "At LegalEdge (\"we\", \"our\", or \"us\"), we respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our website and services.",
+      "informationCollect": "Information We Collect",
+      "informationCollectText": "We collect several types of information from and about users of our services, including:",
+      "personalInfo": "Personal Information: Name, email address, phone number, billing information, and other information you provide when creating an account or using our services.",
+      "documentInfo": "Document Information: Content of legal documents you upload for analysis.",
+      "usageInfo": "Usage Information: Information about how you use our website and services, including IP address, browser type, device information, and pages visited.",
+      "howWeUse": "How We Use Your Information",
+      "howWeUseText": "We use the information we collect to:",
+      "provideServices": "Provide, maintain, and improve our services",
+      "processTransactions": "Process transactions and send related information",
+      "respondRequests": "Respond to your comments, questions, and requests",
+      "sendNotices": "Send you technical notices, updates, security alerts, and support messages",
+      "monitorTrends": "Monitor and analyze trends, usage, and activities in connection with our services",
+      "detectIssues": "Detect, prevent, and address technical issues",
+      "protectActivity": "Protect against harmful, unauthorized, or illegal activity",
+      "documentSecurity": "Document Security and Retention",
+      "documentSecurityText": "All documents uploaded to our platform are encrypted in transit and at rest. We use industry-standard security measures to protect your data.",
+      "documentRetentionText": "By default, we do not permanently store your documents after analysis is complete. Documents are automatically deleted from our servers within 30 days unless you specifically request longer retention.",
+      "sharing": "Sharing Your Information",
+      "sharingText": "We may share your information with:",
+      "serviceProviders": "Service Providers: Third-party vendors who provide services on our behalf, such as payment processing, data analysis, email delivery, and customer service.",
+      "legalRequirements": "Legal Requirements: When required by law or in response to valid requests by public authorities.",
+      "businessTransfers": "Business Transfers: In connection with a merger, acquisition, or sale of assets.",
+      "noSell": "We do not sell your personal information to third parties.",
+      "yourRights": "Your Rights and Choices",
+      "yourRightsText": "Depending on your location, you may have certain rights regarding your personal information, including:",
+      "accessRight": "Access to your personal information",
+      "correctionRight": "Correction of inaccurate or incomplete information",
+      "deletionRight": "Deletion of your personal information",
+      "restrictionRight": "Restriction or objection to processing",
+      "portabilityRight": "Data portability",
+      "exerciseRights": "To exercise these rights, please contact us at privacy@legalverifyai.com.",
+      "cookies": "Cookies and Tracking Technologies",
+      "cookiesText": "We use cookies and similar tracking technologies to track activity on our website and hold certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.",
+      "dataSecurity": "Data Security",
+      "dataSecurityText": "We have implemented appropriate technical and organizational measures to secure your personal information from accidental loss and unauthorized access, use, alteration, and disclosure.",
+      "securityNote": "However, no method of transmission over the Internet or electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.",
+      "internationalTransfers": "International Data Transfers",
+      "internationalTransfersText": "Your information may be transferred to and processed in countries other than the country in which you reside. These countries may have data protection laws that are different from the laws of your country.",
+      "safeguardsText": "We have taken appropriate safeguards to ensure that your personal information remains protected in accordance with this Privacy Policy.",
+      "childrenPrivacy": "Children's Privacy",
+      "childrenPrivacyText": "Our services are not intended for individuals under the age of 18. We do not knowingly collect personal information from children under 18. If we learn we have collected personal information from a child under 18, we will delete that information.",
+      "changes": "Changes to This Privacy Policy",
+      "changesText": "We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the \"Last Updated\" date.",
+      "contact": "Contact Us",
+      "contactText": "If you have any questions about this Privacy Policy, please contact us at:"
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "effectiveDate": "Effective Date: Feb. 02, 2026",
+      "welcome": "Welcome to LegalEdge (\"Company\", \"we\", \"our\", or \"us\"). These Terms of Service (\"Terms\") govern your use of our AI-powered legal document analysis platform and any related services or applications (collectively, the \"Service\").",
+      "agreement": "By accessing or using the Service, you agree to be bound by these Terms. If you do not agree, do not use our Service.",
+      "serviceDescription": "Service Description",
+      "serviceDescriptionText": "Our platform uses AI technology to analyze legal documents, identify potentially problematic clauses, and suggest improvements. The insights provided are for informational purposes only and do not constitute legal advice. We do not replace licensed attorneys.",
+      "eligibility": "Eligibility",
+      "eligibilityText": "You must be at least 18 years old and capable of forming a binding contract in your jurisdiction to use our Service.",
+      "account": "Account Registration",
+      "accountText": "You may be required to create an account to access certain features. You agree to provide accurate information and keep your account credentials secure. You are responsible for all activity under your account.",
+      "acceptableUse": "Acceptable Use",
+      "acceptableUseText": "You agree not to:",
+      "unlawful": "Use the Service for unlawful purposes or in violation of any applicable laws;",
+      "noRight": "Upload documents that you do not have the legal right to submit;",
+      "reverseEngineer": "Attempt to reverse engineer, scrape, or otherwise misuse the platform;",
+      "disrupt": "Interfere with or disrupt the Service's functionality.",
+      "userContent": "User Content & Confidentiality",
+      "userContentText": "You retain ownership of the documents and content you upload (\"User Content\"). We do not claim ownership over your content. We process documents securely and do not share them with third parties unless required by law.",
+      "note": "Note: While we implement strong data security practices, we recommend redacting or anonymizing highly sensitive or personal data before uploading.",
+      "intellectualProperty": "Intellectual Property",
+      "intellectualPropertyText": "The Service, including all software, algorithms, and content (excluding User Content), is the property of LegalEdge and protected by intellectual property laws. You may not use our branding, code, or content without permission.",
+      "disclaimer": "Disclaimer of Legal Advice",
+      "disclaimerText": "The Service does not provide legal advice. All outputs from our AI system are automated and provided for general information only. You should consult a qualified attorney for legal advice specific to your situation.",
+      "noWarranties": "No Warranties",
+      "noWarrantiesText": "The Service is provided \"as is\" and \"as available.\" We make no warranties, express or implied, including but not limited to merchantability, fitness for a particular purpose, or non-infringement.",
+      "limitation": "Limitation of Liability",
+      "limitationText": "To the maximum extent permitted by law, LegalEdge shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from or relating to your use of the Service.",
+      "termination": "Termination",
+      "terminationText": "We reserve the right to suspend or terminate your access to the Service at any time, with or without notice, for conduct that violates these Terms or is otherwise harmful to the Service or other users.",
+      "modifications": "Modifications",
+      "modificationsText": "We may update these Terms from time to time. We'll notify you of significant changes by posting the updated Terms on our website. Continued use of the Service after changes means you accept the updated Terms.",
+      "governingLaw": "Governing Law",
+      "governingLawText": "These Terms shall be governed by and interpreted in accordance with Norwegian laws, without regard to conflict of law principles.",
+      "contact": "Contact Us",
+      "contactText": "For any questions about these Terms, please contact us at:",
+      "moreInfo": "For more information about how we handle your data, please review our"
+    }
+  }
+}

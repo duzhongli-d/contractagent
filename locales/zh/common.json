@@ -1,0 +1,426 @@
+{
+  "localeNames": {
+    "en": "English",
+    "zh": "中文",
+    "nb": "Norsk"
+  },
+  "nav": {
+    "home": "首页",
+    "liveAnalyser": "实时分析",
+    "upload": "演示",
+    "buyTokens": "购买令牌",
+    "contact": "联系",
+    "signIn": "登录",
+    "signUp": "注册",
+    "openMenu": "打开菜单"
+  },
+  "hero": {
+    "title": "AI驱动的法律合同分析",
+    "subtitle": "更快·更智能·更可靠",
+    "description": "节省手动审查的时间。让AI立即识别法律风险并标记合同中的潜在问题。",
+    "analyzeButton": "分析合同",
+    "viewDemo": "查看演示",
+    "trustIndicators": {
+      "secure": "安全可靠",
+      "fast": "快速响应",
+      "ai": "AI 智能",
+      "ready": "AI 就绪"
+    }
+  },
+  "howItWorks": {
+    "title": "流程简单",
+    "heading": "它是如何工作的",
+    "description": "我们的AI驱动平台通过三个简单步骤简化法律文档验证。",
+    "step1": {
+      "title": "1. 上传文档",
+      "description": "通过我们安全的平台轻松上传您的法律文档。"
+    },
+    "step2": {
+      "title": "2. AI分析",
+      "description": "我们的AI扫描并分析文档中的潜在法律风险。"
+    },
+    "step3": {
+      "title": "3. 接收报告",
+      "description": "在几分钟内获得详细的分析报告，标记问题。"
+    }
+  },
+  "disclaimer": {
+    "title": "本网站为演示版本。",
+    "warning1": "合同信息不会被存储，但OpenAI可能会使用数据来改进其服务。请勿上传敏感或机密文档。",
+    "warning2": "分析结果的准确性或可靠性声明并非真实、测试或有效。"
+  },
+  "disclaimerModal": {
+    "title": "免责声明",
+    "description": "此合同分析服务是<strong>演示工具</strong>，<strong>不适用于实际场景</strong>。",
+    "items": {
+      "noSensitive": "请勿上传敏感、机密或具有法律约束力的文件。",
+      "automatedAnalysis": "分析是自动化的，可能包含不准确之处。",
+      "noLegalAdvice": "本服务<strong>不能替代</strong>专业法律咨询。",
+      "noLiability": "提供者对本工具的使用<strong>不承担任何责任</strong>。"
+    },
+    "checkbox": "我理解并接受这些条款。",
+    "cancel": "取消",
+    "accept": "接受并继续"
+  },
+  "demoBanner": {
+    "title": "演示项目",
+    "description": "这是演示版本，不能用于法律目的或生产环境。",
+    "close": "关闭"
+  },
+  "common": {
+    "loading": "加载中..."
+  },
+  "features": {
+    "title": "强大功能",
+    "heading": "核心功能",
+    "description": "我们的AI驱动平台通过这些核心功能提供全面的法律文档分析。",
+    "items": {
+      "riskIdentification": {
+        "title": "风险识别",
+        "description": "AI标记具有潜在法律风险的条款，突出需要关注的领域。"
+      },
+      "contextualInsights": {
+        "title": "上下文感知洞察",
+        "description": "突出模糊或问题表述，对法律语言有上下文理解。"
+      },
+      "speedAccuracy": {
+        "title": "速度和准确性",
+        "description": "在几秒钟内分析合同，减少人工工作量的同时保持高准确性。"
+      },
+      "customizable": {
+        "title": "可自定义审查",
+        "description": "设置特定参数以匹配您的律师事务所的要求和标准。"
+      },
+      "secure": {
+        "title": "安全保密",
+        "description": "端到端加密保护敏感文档和客户信息。"
+      },
+      "integration": {
+        "title": "集成就绪",
+        "description": "与您现有的法律软件和文档管理系统无缝集成。"
+      }
+    }
+  },
+  "whyChoose": {
+    "title": "竞争优势",
+    "heading": "为什么选择我们的AI？",
+    "description": "了解我们的AI驱动解决方案如何与传统手动审查流程进行比较。",
+    "timeSavings": "节省时间",
+    "costEffectiveness": "成本效益",
+    "traditional": {
+      "title": "传统审查",
+      "description": "50页合同平均需要5-7小时的法律专业人员手动审查。",
+      "timeValue": "5-7 小时",
+      "costDescription": "律师助理平均每小时费用为 200-1500 元。",
+      "costValue": "400-3,000 元",
+      "costPeriod": "每份合同"
+    },
+    "ai": {
+      "title": "AI驱动审查",
+      "description": "我们的AI在几分钟内分析相同的50页合同，仅需审查标记的问题。",
+      "timeValue": "15-30 分钟",
+      "costDescription": "基于订阅的定价，无限制文档分析。",
+      "costValue": "100-300 元/月",
+      "costPeriod": "每月，无限制合同"
+    },
+    "testimonials": {
+      "title": "早期用户评价",
+      "reviews": [
+        {
+          "name": "Halo Chen",
+          "role": "管理合伙人，Donovan Legal",
+          "comment": "这个AI工具改变了我们的合同审查流程。过去需要几天的工作现在只需几小时，让我们律师可以专注于更高价值的工作。"
+        },
+        {
+          "name": "Isabelle Tang",
+          "role": "法律运营总监，Global Corp",
+          "comment": "风险识别的准确性令人印象深刻。我们捕获了几个在我们标准审查流程中可能被忽视的关键问题。"
+        }
+      ]
+    }
+  },
+  "cta": {
+    "title": "准备好改变您的法律文档审查了吗？",
+    "description": "加入领先律师事务所的行列，已经在合同审查上节省了数百小时。",
+    "tryAnalysis": "尝试您的第一次分析",
+    "viewDemo": "查看演示"
+  },
+  "faq": {
+    "title": "常见问题",
+    "heading": "常见问题解答",
+    "description": "找到关于我们AI驱动法律文档验证的常见问题的答案。",
+    "questions": {
+      "accuracy": {
+        "question": "AI在识别法律风险方面的准确性如何？",
+        "answer": "我们的AI已经在数百万法律文档上进行了训练，在识别常见法律风险和问题方面达到了98%以上的准确性。系统通过机器学习和法律专业人员的反馈持续改进。"
+      },
+      "security": {
+        "question": "我的数据是否安全和保密？",
+        "answer": "绝对安全。我们使用端到端加密和严格的数据安全协议。您的文档永远不会永久存储，我们遵守所有相关的数据保护法规，包括GDPR。我们还为有更严格安全要求的公司提供本地部署选项。"
+      },
+      "documentTypes": {
+        "question": "AI可以分析哪些类型的法律文档？",
+        "answer": "我们的AI可以分析广泛的法律文档，包括合同、保密协议、雇佣协议、租赁协议、服务条款、隐私政策等。系统特别擅长标准化法律文档，但也可以处理定制协议。"
+      },
+      "jurisdictions": {
+        "question": "AI如何处理不同的司法管辖区？",
+        "answer": "AI已在来自多个司法管辖区的法律文档上进行了训练，包括中国，美国联邦和州法律、欧盟法规和英国法律。您在上传文档时可以指定相关司法管辖区，AI将应用适当的法律标准和考虑因素。"
+      },
+      "replacement": {
+        "question": "AI可以替代我们的法律团队吗？",
+        "answer": "不能，我们的AI旨在补充您的法律团队，而不是替代它。AI处理耗时的初步审查并标记潜在问题，让您的法律专业人员专注于分析、策略和客户咨询。这是一个让您的法律团队更高效、更有效的工具。"
+      },
+      "integrations": {
+        "question": "有哪些可用的集成？",
+        "answer": "我们的平台与流行的法律文档管理系统集成，包括Clio、DocuSign、iManage和NetDocuments。我们还提供API访问，用于与您现有的工作流程和系统进行自定义集成。"
+      }
+    }
+  },
+  "footer": {
+    "description": "AI驱动的法律文档验证平台，帮助法律专业人士节省时间并降低风险。",
+    "quickLinks": "快速链接",
+    "company": "公司",
+    "legal": "法律",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系",
+    "copyright": "版权所有",
+    "pricing": "价格",
+    "caseStudies": "案例研究",
+    "documentation": "文档",
+    "aboutUs": "关于我们",
+    "blog": "博客",
+    "careers": " Careers",
+    "security": "安全",
+    "compliance": "合规"
+  },
+  "liveAnalyser": {
+    "title": "合同分析",
+    "subtitle": "AI驱动的法律文档分析",
+    "upload": {
+      "title": "上传合同",
+      "description": "上传您的法律文档进行AI分析",
+      "selectFile": "选择文件",
+      "analyzing": "分析中...",
+      "analyze": "开始分析",
+      "disclaimer": "免责声明",
+      "selectFileAlert": "请先选择一个文件。",
+      "acceptDisclaimerAlert": "请先接受免责声明。"
+    },
+    "results": {
+      "title": "文档分析结果",
+      "subtitle": "AI生成的您的法律文档分析",
+      "error": "错误",
+      "risks": "已识别的潜在风险",
+      "suggestions": "建议的更改",
+      "unusual": "检测到的异常条款",
+      "totalAnalyzed": "总计分析",
+      "pages": "页",
+      "words": "字",
+      "documentTab": "文档内容",
+      "feedbackTab": "详细反馈",
+      "risk": "风险",
+      "suggestion": "建议",
+      "unusualClause": "异常条款",
+      "section": "章节",
+      "downloadReport": "下载报告",
+      "uploadNew": "上传新文档"
+    },
+    "disclaimerModal": {
+      "title": "免责声明",
+      "description": "此合同分析服务是<strong>演示工具</strong>，<strong>不适用于实际场景</strong>。",
+      "items": {
+        "noSensitive": "请勿上传敏感、机密或具有法律约束力的文件。",
+        "automatedAnalysis": "分析是自动化的，可能包含不准确之处。",
+        "noLegalAdvice": "本服务<strong>不能替代</strong>专业法律咨询。",
+        "noLiability": "提供者对本工具的使用<strong>不承担任何责任</strong>。"
+      },
+      "checkbox": "我理解并接受这些条款。",
+      "cancel": "取消",
+      "accept": "接受并继续"
+    }
+  },
+  "buytokens": {
+    "title": "购买令牌",
+    "subtitle": "需要分析更多文档，或想尝试我们的高级模型？",
+    "backHome": "返回首页",
+    "orderSummary": "订单摘要",
+    "tokensPrice": "令牌（每枚{price}元）",
+    "volumeDiscount": "批量折扣",
+    "total": "总计",
+    "securePayment": "安全支付处理",
+    "completePurchase": "完成购买",
+    "redirectStripe": "您将被重定向到Stripe以完成购买。",
+    "payWith": "使用Visa、Mastercard或其他支付方式支付",
+    "minimumAmountError": "最低金额为6元",
+    "redirectingToStripe": "正在重定向到Stripe...",
+    "checkoutWithStripe": "使用Stripe支付 • {amount}元",
+    "redirectedSecureCheckout": "您将被重定向到Stripe的安全支付页面以完成购买。",
+    "securePaymentProcessing": "安全支付处理",
+    "noDataStored": "我们不会存储任何数据。",
+    "supportPaymentMethods": "支持所有主要支付方式",
+    "perUnit": "每枚",
+    "tokens": "令牌",
+    "tokenSelector": {
+      "title": "选择令牌数量",
+      "description": "选择您想要购买的令牌数量。每个令牌只需2元，即可分析一份文档。",
+      "subtotal": "小计",
+      "tokensXPrice": "令牌×价格",
+      "volumeDiscount": "批量折扣",
+      "discountOf": "折扣",
+      "totalPrice": "总价",
+      "discountIncluded": "已包含折扣",
+      "tokens": "令牌",
+      "perDocument": "即可分析一份文档。"
+    },
+    "success": {
+      "title": "支付成功！",
+      "subtitle": "通过Stripe处理的支付",
+      "thankYou": "感谢您的购买",
+      "tokensBought": "您已购买",
+      "basePrice": "基本价格",
+      "totalPaid": "已付总额",
+      "orderDetails": "订单详情",
+      "orderId": "订单ID",
+      "date": "日期",
+      "paymentMethod": "支付方式",
+      "goToAnalysis": "前往分析页面",
+      "goToHome": "前往首页"
+    },
+    "error": {
+      "missingSession": "缺少会话ID",
+      "provideSession": "请提供有效的session_id",
+      "goBack": "返回购买页面"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "对平台或其他相关问题有疑问？我们会尽力回答。",
+    "email": "电子邮件",
+    "support": "支持",
+    "sales": "销售",
+    "phone": "电话",
+    "phoneUnavailable": "+86 180 1792 6742",
+    "hours": "周一至周五，09:00 - 17:00",
+    "sendMessage": "给我们留言",
+    "fillForm": "填写下方的表格，我们会尽快回复您。",
+    "firstName": "名",
+    "lastName": "姓",
+    "emailField": "电子邮件",
+    "phoneOptional": "电话（可选）",
+    "inquiryType": "咨询类型",
+    "selectInquiry": "选择咨询类型",
+    "general": "一般咨询",
+    "supportOption": "技术支持",
+    "billingOption": "账单",
+    "partnership": "合作",
+    "message": "留言",
+    "placeholderMessage": "我们如何帮助您？",
+    "send": "发送留言",
+    "availability": "可用时间",
+    "availabilityDesc": "我们可以在以下时间段通过电话或电子邮件回复您：",
+    "weekdays": "周一至周五",
+    "time": "9:00 - 17:00",
+    "urgent": "对于工作时间外的紧急事项，请发送电子邮件至eric.du@halooffice.com，主题行中注明\"紧急\"，我们将尽快回复。",
+    "success": "您的留言已发送！",
+    "error": "出现问题，请稍后再试。"
+  },
+  "upload": {
+    "title": "上传合同",
+    "subtitle": "上传您的法律文档进行AI分析",
+    "document": "",
+    "analyzing": "正在分析文档...{progress}%",
+    "startAnalysis": "开始分析"
+  },
+  "legal": {
+    "privacy": {
+      "title": "隐私政策",
+      "lastUpdated": "最后更新：Feb. 02, 2026",
+      "introduction": "简介",
+      "introductionText": "在LegalEdge，我们尊重您的隐私，并致力于保护您的个人数据。本隐私政策说明了我们如何在您使用我们的网站和服务时收集、使用、披露和保护您的信息。",
+      "informationCollect": "我们收集的信息",
+      "informationCollectText": "我们从用户和关于我们服务的用户收集几种类型的信息，包括：",
+      "personalInfo": "创建账户或使用我们的服务时提供的姓名、电子邮件地址、电话号码、账单信息和其他信息。",
+      "documentInfo": "您上传用于分析的法律文档内容。",
+      "usageInfo": "关于您如何使用我们的网站和服务的信息，包括IP地址、浏览器类型、设备信息和访问的页面。",
+      "howWeUse": "我们如何使用您的信息",
+      "howWeUseText": "我们收集的信息用于：",
+      "provideServices": "提供、维护和改进我们的服务",
+      "processTransactions": "处理交易并发送相关信息",
+      "respondRequests": "回复您的评论、问题和请求",
+      "sendNotices": "向您发送技术通知、更新、安全警报和支持消息",
+      "monitorTrends": "监控和分析与我们的服务相关的趋势、使用情况和活动",
+      "detectIssues": "检测、预防和解决技术问题",
+      "protectActivity": "防止有害、未经授权或非法活动",
+      "documentSecurity": "文档安全和保留",
+      "documentSecurityText": "上传到我们平台的所有文档在传输和静态时都是加密的。我们使用行业标准的安全措施来保护您的数据。",
+      "documentRetentionText": "默认情况下，分析完成后我们不会永久存储您的文档。除非您特别要求延长保留期限，否则文档会在30天内自动从我们的服务器中删除。",
+      "sharing": "共享您的信息",
+      "sharingText": "我们可能与以下各方共享您的信息：",
+      "serviceProviders": "代表我们提供服务的第三方供应商，如支付处理、数据分析、电子邮件递送和客户服务。",
+      "legalRequirements": "当法律要求或响应公共当局的有效请求时。",
+      "businessTransfers": "与合并、收购或资产出售相关。",
+      "noSell": "我们不会将您的个人信息出售给第三方。",
+      "yourRights": "您的权利和选择",
+      "yourRightsText": "根据您所在的位置，您可能对您的个人信息拥有某些权利，包括：",
+      "accessRight": "访问您的个人信息",
+      "correctionRight": "更正不准确或不完整的信息",
+      "deletionRight": "删除您的个人信息",
+      "restrictionRight": "限制或反对处理",
+      "portabilityRight": "数据可移植性",
+      "exerciseRights": "要行使这些权利，请通过privacy@legalverifyai.com联系我们。",
+      "cookies": "Cookie和跟踪技术",
+      "cookiesText": "我们使用Cookie和类似的跟踪技术来跟踪我们网站上的活动并保存某些信息。您可以指示您的浏览器拒绝所有Cookie，或在发送Cookie时进行指示。",
+      "dataSecurity": "数据安全",
+      "dataSecurityText": "我们已实施适当的技术和组织措施，以保护您的个人信息免受意外丢失和未经授权的访问、使用、变更和披露。",
+      "securityNote": "但是，通过互联网或电子存储传输的方法都不是100%安全的。虽然我们努力使用商业上可接受的方法来保护您的个人信息，但我们不能保证其绝对安全。",
+      "internationalTransfers": "国际数据传输",
+      "internationalTransfersText": "您的信息可能会被传输到您居住的国家以外的国家并进行处理。这些国家的数据保护法律可能与您所在国家的法律不同。",
+      "safeguardsText": "我们已采取适当的保障措施，确保您的个人信息根据本隐私政策保持受到保护。",
+      "childrenPrivacy": "儿童隐私",
+      "childrenPrivacyText": "我们的服务不适用于18岁以下的个人。我们不会故意收集18岁以下儿童的个人信息。如果我们得知我们收集了18岁以下儿童的个人信息，我们将删除该信息。",
+      "changes": "本隐私政策的变更",
+      "changesText": "我们可能会不时更新本隐私政策。我们将通过在本页面上发布新的隐私政策并更新\"最后更新\"日期来通知您任何变更。",
+      "contact": "联系我们",
+      "contactText": "如果您对本隐私政策有任何疑问，请通过以下方式联系我们："
+    },
+    "terms": {
+      "title": "服务条款",
+      "effectiveDate": "生效日期：Feb. 02, 2026",
+      "welcome": "欢迎使用LegalEdge。这些服务条款（\"条款\"）管辖您对我们AI驱动的法律文档分析平台以及任何相关服务或应用程序（统称\"服务\"）的使用。",
+      "agreement": "通过访问或使用服务，您同意受这些条款的约束。如果您不同意，请不要使用我们的服务。",
+      "serviceDescription": "服务描述",
+      "serviceDescriptionText": "我们的平台使用AI技术分析法律文档、识别潜在的问题条款并提出改进建议。所提供的见解仅供参考，不构成法律建议。我们不取代有执照的律师。",
+      "eligibility": "资格",
+      "eligibilityText": "您必须年满18岁，并且能够在您的司法管辖区内形成有约束力的合同才能使用我们的服务。",
+      "account": "账户注册",
+      "accountText": "您可能需要创建一个账户才能访问某些功能。您同意提供准确的信息并保持账户凭据的安全。您对账户下的所有活动负责。",
+      "acceptableUse": "可接受的使用",
+      "acceptableUseText": "您同意不：",
+      "unlawful": "将服务用于非法目的或违反任何适用法律；",
+      "noRight": "上传您没有合法权利提交的文档；",
+      "reverseEngineer": "试图逆向工程、抓取或以其他方式滥用平台；",
+      "disrupt": "干扰或破坏服务的功能。",
+      "userContent": "用户内容和保密性",
+      "userContentText": "您保留对上传的文档和内容（\"用户内容\"）的所有权。我们不会对您的内容主张所有权。我们安全地处理文档，除非法律要求，否则不会与第三方共享。",
+      "note": "注意：虽然我们实施强大的数据安全实践，但我们建议在上传前对高度敏感或个人信息进行编辑或匿名化处理。",
+      "intellectualProperty": "知识产权",
+      "intellectualPropertyText": "服务，包括所有软件、算法和内容（不包括用户内容），是LegalEdge的财产，受知识产权法保护。未经许可，您不得使用我们的品牌、代码或内容。",
+      "disclaimer": "法律免责声明",
+      "disclaimerText": "服务不提供法律建议。我们AI系统的所有输出都是自动化的，仅提供一般信息。您应该就您的具体情况咨询有资格的律师。",
+      "noWarranties": "无保证",
+      "noWarrantiesText": "服务按\"原样\"和\"可用\"提供。我们不作任何明示或暗示的保证，包括但不限于适销性、特定目的的适用性或不侵权。",
+      "limitation": "责任限制",
+      "limitationText": "在法律允许的最大范围内，LegalEdge对于因您使用服务或与之相关的任何间接、附带、特殊、后果性或惩罚性损害不承担责任。",
+      "termination": "终止",
+      "terminationText": "我们保留随时以任何理由暂停或终止您访问服务的权利，恕不另行通知，包括违反这些条款或对服务或其他用户有害的行为。",
+      "modifications": "修改",
+      "modificationsText": "我们可能会不时更新这些条款。我们将通过在我们的网站上发布更新的条款来通知您重大变更。在变更后继续使用服务即表示您接受更新的条款。",
+      "governingLaw": "适用法律",
+      "governingLawText": "这些条款应受所在地法律管辖并根据所在地法律解释，不考虑法律冲突原则。",
+      "contact": "联系我们",
+      "contactText": "如对这些条款有任何疑问，请通过以下方式联系我们：",
+      "moreInfo": "有关我们如何处理您的数据的更多信息，请参阅我们的"
+    }
+  }
+}

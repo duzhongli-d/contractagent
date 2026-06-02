@@ -1,0 +1,398 @@
+{
+  "nav": {
+    "home": "Hjem",
+    "upload": "Demo",
+    "liveAnalyser": "Analyser",
+    "buyTokens": "Kjøp Tokens",
+    "contact": "Kontakt",
+    "signIn": "Logg inn",
+    "signUp": "Registrer"
+  },
+  "hero": {
+    "title": "AI-drevet juridisk kontraktsanalyse",
+    "subtitle": "Raskere. Smartere. Mer pålitelig.",
+    "description": "Spar timer på manuell gjennomgang. La AI identifisere juridiske risikoer og flagge potensielle problemer i kontrakter øyeblikkelig.",
+    "analyzeButton": "Analyser kontrakt",
+    "viewDemo": "Se demo",
+    "trustIndicators": {
+      "secure": "Sikker & pålitelig",
+      "fast": "Rask respons",
+      "ai": "AI-drevet",
+      "ready": "AI klar"
+    }
+  },
+  "howItWorks": {
+    "title": "Enkel prosess",
+    "heading": "Hvordan det fungerer",
+    "description": "Vår AI-drevne plattform forenkler juridisk dokumentverifisering i tre enkle trinn.",
+    "step1": {
+      "title": "1. Last opp dokument",
+      "description": "Last opp juridiske dokumenter enkelt gjennom vår sikre plattform."
+    },
+    "step2": {
+      "title": "2. AI-analyse",
+      "description": "Vår AI skanner og analyserer dokumentet for potensielle juridiske risikoer."
+    },
+    "step3": {
+      "title": "3. Motta rapport",
+      "description": "Få en detaljert analyserapport med flaggede problemer på minutter."
+    }
+  },
+  "disclaimer": {
+    "title": "Denne nettsiden er en demo.",
+    "warning1": "Ingen informasjon om kontrakter lagres, men OpenAI kan bruke dataene til å forbedre tjenesten. Vennligst ikke last opp sensitive eller konfidensielle dokumenter.",
+    "warning2": "Ingen påstander om analysenes nøyaktighet eller pålitelighet er ekte, testet eller gyldige."
+  },
+  "features": {
+    "title": "Kraftfulle funksjoner",
+    "heading": "Nøkkelfunksjoner",
+    "description": "Vår AI-drevne plattform tilbyr omfattende analyse av juridiske dokumenter med disse nøkkelfunksjonene.",
+    "items": {
+      "riskIdentification": {
+        "title": "Risikoidentifikasjon",
+        "description": "AI flagger klausuler med potensielle juridiske risikoer, og fremhever områder som trenger oppmerksomhet."
+      },
+      "contextualInsights": {
+        "title": "Kontekstbasert innsikt",
+        "description": "Fremhever vage eller problematiske formuleringer med kontekstuell forståelse av juridisk språk."
+      },
+      "speedAccuracy": {
+        "title": "Hastighet og nøyaktighet",
+        "description": "Analyserer kontrakter på sekunder, reduserer menneskelig arbeidsbelastning samtidig som høy nøyaktighet opprettholdes."
+      },
+      "customizable": {
+        "title": "Tilpassbare vurderinger",
+        "description": "Sett spesifikke parametere for å matche din advokatfyrs krav og standarder."
+      },
+      "secure": {
+        "title": "Sikker og konfidensiell",
+        "description": " ende-til-ende kryptering for å beskytte sensitive dokumenter og klientinformasjon."
+      },
+      "integration": {
+        "title": "Klar for integrasjon",
+        "description": "Sømløst integrert med eksisterende juridisk programvare og dokumenthåndteringssystemer."
+      }
+    }
+  },
+  "whyChoose": {
+    "title": "Konkurransefortrinn",
+    "heading": "Hvorfor velge vår AI?",
+    "description": "Se hvordan vår AI-drevne løsning sammenlignes med tradisjonelle manuelle gjennomgangsprosesser.",
+    "timeSavings": "Tidsbesparelser",
+    "costEffectiveness": "Kostnadseffektivitet",
+    "traditional": {
+      "title": "Tradisjonell gjennomgang",
+      "description": "En 50-siders kontrakt tar i gjennomsnitt 5-7 timer for manuell gjennomgang av en juridisk profesjonell.",
+      "timeValue": "5-7 timer",
+      "costDescription": "Gjennomsnittlig kostnad på 3000-5000 kr per time for gjennomgang av advokatfullmektig.",
+      "costValue": "15 000-35 000 kr",
+      "costPeriod": "Per kontrakt"
+    },
+    "ai": {
+      "title": "AI-drevet gjennomgang",
+      "description": "Vår AI analyserer den samme 50-siders kontrakten på minutter, med menneskelig gjennomgang kun for flaggede problemer.",
+      "timeValue": "15-30 minutter",
+      "costDescription": "Abonnementsbasert prising med ubegrenset dokumentanalyse.",
+      "costValue": "2000-4000 kr",
+      "costPeriod": "Per måned, ubegrensede kontrakter"
+    },
+    "testimonials": {
+      "title": "Hva våre tidlige brukere sier",
+      "reviews": [
+        {
+          "name": "Halo Chen",
+          "role": "Managing Partner, Donovan Legal",
+          "comment": "Dette AI-verktøyet har transformert vår kontraktsgjennomgangsprosess. Det som før tok dager tar nå timer, og lar våre advokater fokusere på arbeid med høyere verdi."
+        },
+        {
+          "name": "Isabelle Tang",
+          "role": "Legal Operations Director, Global Corp",
+          "comment": "Nøyaktigheten i risikoidentifikasjonen har vært imponerende. Vi har oppdaget flere kritiske problemer som kunne ha blitt oversett i vår standard gjennomgangsprosess."
+        }
+      ]
+    }
+  },
+  "cta": {
+    "title": "Klar til å transformere din juridiske dokumentgjennomgang?",
+    "description": "Bli med ledende advokatfirmaer som allerede sparer hundrevis av timer på kontraktsgjennomgang.",
+    "tryAnalysis": "Prøv din første analyse",
+    "viewDemo": "Se demo"
+  },
+  "faq": {
+    "title": "Vanlige spørsmål",
+    "heading": "Ofte stilte spørsmål",
+    "description": "Finn svar på vanlige spørsmål om vår AI-drevne juridiske dokumentverifisering.",
+    "questions": {
+      "accuracy": {
+        "question": "Hvor nøyaktig er AIen til å identifisere juridiske risikoer?",
+        "answer": "Vår AI har blitt trent på millioner av juridiske dokumenter og oppnår over 98% nøyaktighet i å identifisere vanlige juridiske risikoer og problemer. Systemet forbedres kontinuerlig gjennom maskinlæring og tilbakemeldinger fra juridiske fagfolk."
+      },
+      "security": {
+        "question": "Er dataene mine sikre og konfidensielle?",
+        "answer": "Absolutt. Vi bruker ende-til-ende kryptering og strenge datasikkerhetsprotokoller. Dokumentene dine lagres aldri permanent, og vi overholder alle relevante databeskyttelsesreglementer inkludert GDPR. Vi tilbyr også on-premise distribusjonsalternativer for firmaer med strengere sikkerhetskrav."
+      },
+      "documentTypes": {
+        "question": "Hvilke typer juridiske dokumenter kan AIen analysere?",
+        "answer": "Vår AI kan analysere et bredt spekter av juridiske dokumenter inkludert kontrakter, NDAer, ansettelsesavtaler, leieavtaler, vilkår for tjenester, personvernregler og mer. Systemet er spesielt effektivt med standardiserte juridiske dokumenter, men kan også håndtere tilpassede avtaler."
+      },
+      "jurisdictions": {
+        "question": "Hvordan håndterer AIen forskjellige jurisdiksjoner?",
+        "answer": "AIen har blitt trent på juridiske dokumenter fra flere jurisdiksjoner inkludert amerikansk føderal og delstatslovgivning, EU-reguleringer og britisk lov. Du kan spesifisere den relevante jurisdiksjonen når du laster opp dokumenter, og AIen vil bruke de aktuelle juridiske standardene og hensynene."
+      },
+      "replacement": {
+        "question": "Kan AIen erstatte vårt juridiske team?",
+        "answer": "Nei, vår AI er designet for å supplere ditt juridiske team, ikke erstatte det. AIen håndterer den tidkrevende initielle gjennomgangen og flagger potensielle problemer, slik at dine juridiske fagfolk kan konsentrere sin ekspertise om analyse, strategi og klientkonsultasjon. Det er et verktøy som gjør ditt juridiske team mer effektivt."
+      },
+      "integrations": {
+        "question": "Hvilke integrasjoner er tilgjengelige?",
+        "answer": "Vår plattform integrerer med populære juridiske dokumenthåndteringssystemer inkludert Clio, DocuSign, iManage og NetDocuments. Vi tilbyr også API-tilgang for tilpassede integrasjoner med eksisterende arbeidsflyter og systemer."
+      }
+    }
+  },
+  "footer": {
+    "description": "AI-drevet juridisk dokumentverifiseringsplattform som hjelper juridiske fagfolk med å spare tid og redusere risikoer.",
+    "quickLinks": "Hurtigkoblinger",
+    "company": "Selskap",
+    "legal": "Juridisk",
+    "privacy": "Personvernerklæring",
+    "terms": "Vilkår for tjenesten",
+    "contact": "Kontakt",
+    "copyright": "Alle rettigheter reservert",
+    "pricing": "Priser",
+    "caseStudies": "Cases",
+    "documentation": "Dokumentasjon",
+    "aboutUs": "Om oss",
+    "blog": "Blogg",
+    "careers": "Karriere",
+    "security": "Sikkerhet",
+    "compliance": "Samsvar"
+  },
+  "liveAnalyser": {
+    "title": "Kontraktsanalyse",
+    "subtitle": "AI-drevet analyse av juridiske dokumenter",
+    "upload": {
+      "title": "Last opp kontrakt for analyse",
+      "description": "Last opp ditt juridiske dokument for AI-analyse",
+      "selectFile": "Velg fil",
+      "analyzing": "Analyserer...",
+      "analyze": "Analyser",
+      "disclaimer": "Ansvarsfraskrivelse",
+      "selectFileAlert": "Vennligst velg en fil først.",
+      "acceptDisclaimerAlert": "Vennligst aksepter ansvarsfraskrivelsen først."
+    },
+    "results": {
+      "title": "Dokumentanalyse resultater",
+      "subtitle": "AI-generert analyse av ditt juridiske dokument",
+      "error": "Feil",
+      "risks": "potensielle risikoer identifisert",
+      "suggestions": "anbefalte endringer",
+      "unusual": "uvanlig klausul oppdaget",
+      "totalAnalyzed": "Totalt analysert",
+      "pages": "sider",
+      "words": "ord",
+      "documentTab": "Dokumentinnhold",
+      "feedbackTab": "Detaljert feedback",
+      "risk": "Risiko",
+      "suggestion": "Anbefaling",
+      "unusualClause": "Uvanlig klausul",
+      "section": "Seksjon",
+      "downloadReport": "Last ned rapport",
+      "uploadNew": "Last opp et nytt dokument"
+    },
+    "disclaimerModal": {
+      "title": "Ansvarsfraskrivelse",
+      "description": "Denne kontraktsanalysetjenesten er et <strong>demonstrasjonsverktøy</strong> og er <strong>ikke beregnet for bruk i virkelige situasjoner</strong>.",
+      "items": {
+        "noSensitive": "Ikke last opp sensitive, konfidensielle eller juridisk bindende dokumenter.",
+        "automatedAnalysis": "Analysen er automatisert og kan inneholde unøyaktigheter.",
+        "noLegalAdvice": "Denne tjenesten <strong>erstatt ikke</strong> profesjonell juridisk rådgivning.",
+        "noLiability": "Leverandøren påtar seg <strong>intet ansvar</strong> for bruken av dette verktøyet."
+      },
+      "checkbox": "Jeg forstår og godtar disse vilkårene.",
+      "cancel": "Avbryt",
+      "accept": "Godta og fortsett"
+    }
+  },
+  "buytokens": {
+    "title": "Kjøp Tokens",
+    "subtitle": "Trenger du flere dokumenter analysert, eller teste vår premium modell?",
+    "backHome": "Tilbake til hovedsiden",
+    "orderSummary": "Ordresammendrag",
+    "tokensPrice": "Tokens ({price} NOK per stk)",
+    "volumeDiscount": "Volumrabatt",
+    "total": "Totalt",
+    "securePayment": "Sikker betalingsbehandling",
+    "completePurchase": "Fullfør kjøpet ditt",
+    "redirectStripe": "Du vil bli omdirigert til Stripe for å fullføre kjøpet.",
+    "payWith": "Betal med Visa, Mastercard eller andre betalingsmetoder",
+    "minimumAmountError": "Minimumsbeløpet er 6 NOK",
+    "redirectingToStripe": "Omdirigerer til Stripe...",
+    "checkoutWithStripe": "Betaling med Stripe • {amount} NOK",
+    "redirectedSecureCheckout": "Du vil bli omdirigert til Stripes sikre betalingsside for å fullføre kjøpet.",
+    "securePaymentProcessing": "Sikker betalingsbehandling",
+    "noDataStored": "Ingen data lagres hos oss.",
+    "supportPaymentMethods": "Støtte for alle store betalingsmetoder",
+    "perUnit": "per stk",
+    "tokens": "Tokens",
+    "tokenSelector": {
+      "title": "Velg antall Tokens",
+      "description": "Velg hvor mange tokens du vil kjøpe. Hver Token koster 2 NOK",
+      "subtotal": "Delsum",
+      "tokensXPrice": "tokens × pris",
+      "volumeDiscount": "Volumrabatt",
+      "discountOf": "rabatt",
+      "totalPrice": "Totalpris",
+      "discountIncluded": "rabatt inkludert",
+      "tokens": "Tokens",
+      "perDocument": "og lar deg analysere ett dokument."
+    },
+    "success": {
+      "title": "Betaling vellykket!",
+      "subtitle": "Betalingen prosessert gjennom Stripe",
+      "thankYou": "Tusen takk for ditt kjøp",
+      "tokensBought": "Du har kjøpt",
+      "basePrice": "Grunnpris",
+      "totalPaid": "Totalt betalt",
+      "orderDetails": "Ordredetaljer",
+      "orderId": "Ordre ID",
+      "date": "Dato",
+      "paymentMethod": "Betalingsmåte",
+      "goToAnalysis": "Gå til analyse-siden",
+      "goToHome": "Gå til hovedsiden"
+    },
+    "error": {
+      "missingSession": "Manglende session ID",
+      "provideSession": "Vennligst oppgi en gyldig session_id",
+      "goBack": "Gå tilbake til kjøpsside"
+    }
+  },
+  "contact": {
+    "title": "Kontakt oss",
+    "subtitle": "Har du spørsmål om plattformen eller annet relevant? Vi skal svare så godt det lar seg gjøre.",
+    "email": "E-post",
+    "support": "Support",
+    "sales": "Salg",
+    "phone": "Telefon",
+    "phoneUnavailable": "+86 180 1792 6742",
+    "hours": "Mandag - Fredag, 09:00 - 17:00",
+    "sendMessage": "Send oss en beskjed",
+    "fillForm": "Fyll ut skjemaet nedenfor, så kommer vi tilbake til deg så fort som mulig.",
+    "firstName": "Fornavn",
+    "lastName": "Etternavn",
+    "emailField": "E-post",
+    "phoneOptional": "Telefon (Valgfritt)",
+    "inquiryType": "Type henvendelse",
+    "selectInquiry": "Velg en type henvendelse",
+    "general": "Generell henvendelse",
+    "billing": "Betaling",
+    "partnership": "Partnerskap",
+    "message": "Beskjed",
+    "placeholderMessage": "Hvordan kan vi hjelpe deg?",
+    "send": "Send melding",
+    "availability": "Tilgjengelighet",
+    "availabilityDesc": "Vi er tilgjengelig til å svare på telefon eller epost i følgende tidsrom:",
+    "weekdays": "Mandag - Fredag",
+    "time": "9:00 - 17:00",
+    "urgent": "For tidssensitive forhold utenfor arbeidstid, send epost til eric.du@halooffice.com med \"HAST\" i emnefeltet, så skal vi svare så fort vi klarer.",
+    "success": "Meldingen din har blitt sendt!",
+    "error": "Noe gikk galt. Vennligst prøv igjen senere."
+  },
+  "upload": {
+    "title": "Last opp dokument",
+    "subtitle": "Last opp ditt juridiske dokument for AI-analyse",
+    "document": "Dokument",
+    "analyzing": "Analyserer dokument... {progress}%",
+    "startAnalysis": "Start analyse"
+  },
+  "legal": {
+    "privacy": {
+      "title": "Personvernerklæring",
+      "lastUpdated": "Sist oppdatert: Feb. 02, 2026",
+      "introduction": "Innledning",
+      "introductionText": "Hos LegalEdge (\"vi\", \"vår\" eller \"oss\") respekterer vi ditt personvern og er forpliktet til å beskytte dine personlige data. Denne personvernerklæringen forklarer hvordan vi samler inn, bruker, offentliggjør og sikrer din informasjon når du bruker vår nettside og tjenester.",
+      "informationCollect": "Informasjon vi samler inn",
+      "informationCollectText": "Vi samler inn flere typer informasjon fra og om brukere av våre tjenester, inkludert:",
+      "personalInfo": "Personlig informasjon: Navn, e-postadresse, telefonnummer, faktureringsinformasjon og annen informasjon du oppgir når du oppretter en konto eller bruker våre tjenester.",
+      "documentInfo": "Dokumentinformasjon: Innhold av juridiske dokumenter du laster opp for analyse.",
+      "usageInfo": "Bruksinformasjon: Informasjon om hvordan du bruker vår nettside og tjenester, inkludert IP-adresse, nettlesertype, enhetsinformasjon og besøkte sider.",
+      "howWeUse": "Hvordan vi bruker din informasjon",
+      "howWeUseText": "Vi bruker informasjonen vi samler inn til å:",
+      "provideServices": "Tilby, vedlikeholde og forbedre våre tjenester",
+      "processTransactions": "Behandle transaksjoner og sende relatert informasjon",
+      "respondRequests": "Svare på dine kommentarer, spørsmål og forespørsler",
+      "sendNotices": "Sende deg tekniske merknader, oppdateringer, sikkerhetsvarsler og supportmeldinger",
+      "monitorTrends": "Overvåke og analysere trender, bruk og aktiviteter i forbindelse med våre tjenester",
+      "detectIssues": "Oppdage, forhindre og løse tekniske problemer",
+      "protectActivity": "Beskytte mot skadelig, uautorisert eller ulovlig aktivitet",
+      "documentSecurity": "Dokumentsikkerhet og oppbevaring",
+      "documentSecurityText": "Alle dokumenter som lastes opp til vår plattform er kryptert under transport og i ro. Vi bruker bransjestandard sikkerhetstiltak for å beskytte dine data.",
+      "documentRetentionText": "Som standard lagrer vi ikke dokumentene dine permanent etter at analysen er fullført. Dokumenter slettes automatisk fra serverne våre innen 30 dager med mindre du spesifikt ber om lengre oppbevaring.",
+      "sharing": "Deling av din informasjon",
+      "sharingText": "Vi kan dele din informasjon med:",
+      "serviceProviders": "Tjenesteleverandører: Tredjepartsleverandører som leverer tjenester på våre vegne, som betalingsbehandling, dataanalyse, e-postlevering og kundeservice.",
+      "legalRequirements": "Juridiske krav: Når loven krever det eller som svar på gyldige forespørsler fra offentlige myndigheter.",
+      "businessTransfers": "Forretningsoverføringer: I forbindelse med fusjon, oppkjøp eller salg av eiendeler.",
+      "noSell": "Vi selger ikke din personlige informasjon til tredjeparter.",
+      "yourRights": "Dine rettigheter og valg",
+      "yourRightsText": "Avhengig av hvor du befinner deg, kan du ha visse rettigheter angående din personlige informasjon, inkludert:",
+      "accessRight": "Tilgang til din personlige informasjon",
+      "correctionRight": "Korreksjon av unøyaktig eller ufullstendig informasjon",
+      "deletionRight": "Sletting av din personlige informasjon",
+      "restrictionRight": "Begrensning eller innvending mot behandling",
+      "portabilityRight": "Dataportabilitet",
+      "exerciseRights": "For å utøve disse rettighetene, vennligst kontakt oss på privacy@legalverifyai.com.",
+      "cookies": "Informasjonskapsler og sporings-teknologier",
+      "cookiesText": "Vi bruker informasjonskapsler og lignende sporings-teknologier for å spore aktivitet på vår nettside og holde viss informasjon. Du kan instruere nettleseren din til å nekte alle informasjonskapsler eller til å indikere når en informasjonskapsel sendes.",
+      "dataSecurity": "Datasikkerhet",
+      "dataSecurityText": "Vi har implementert passende tekniske og organisatoriske tiltak for å sikre din personlige informasjon mot utilsiktet tap og uautorisert tilgang, bruk, endring og offentliggjøring.",
+      "securityNote": "Imidlertid er ingen metode for overføring over Internett eller elektronisk lagring 100% sikker. Selv om vi streber etter å bruke kommersielt akseptable midler for å beskytte din personlige informasjon, kan vi ikke garantere dens absolutte sikkerhet.",
+      "internationalTransfers": "Internasjonale dataoverføringer",
+      "internationalTransfersText": "Din informasjon kan overføres til og behandles i andre land enn landet der du er bosatt. Disse landene kan ha databeskyttelseslover som er forskjellig fra lovene i ditt land.",
+      "safeguardsText": "Vi har tatt passende sikkerhetstiltak for å sikre at din personlige informasjon forblir beskyttet i samsvar med denne personvernerklæringen.",
+      "childrenPrivacy": "Barnas personvern",
+      "childrenPrivacyText": "Våre tjenester er ikke beregnet for personer under 18 år. Vi samler ikke bevisst inn personlig informasjon fra barn under 18 år. Hvis vi får vite at vi har samlet inn personlig informasjon fra et barn under 18 år, vil vi slette den informasjonen.",
+      "changes": "Endringer i denne personvernerklæringen",
+      "changesText": "Vi kan oppdatere denne personvernerklæringen fra tid til annen. Vi vil varsle deg om endringer ved å legge ut den nye personvernerklæringen på denne siden og oppdatere \"Sist oppdatert\"-datoen.",
+      "contact": "Kontakt oss",
+      "contactText": "Hvis du har spørsmål om denne personvernerklæringen, vennligst kontakt oss på:"
+    },
+    "terms": {
+      "title": "Vilkår for tjenesten",
+      "effectiveDate": "Gyldig fra: Feb. 02, 2026",
+      "welcome": "Velkommen til LegalEdge (\"Selskapet\", \"vi\", \"vår\" eller \"oss\"). Disse vilkårene for tjenesten (\"Vilkårene\") styrer din bruk av vår AI-drevne plattform for juridisk dokumentanalyse og eventuelle relaterte tjenester eller applikasjoner (samlet kalt \"Tjenesten\").",
+      "agreement": "Ved å få tilgang til eller bruke Tjenesten, godtar du å være bundet av disse Vilkårene. Hvis du ikke godtar, ikke bruk vår Tjeneste.",
+      "serviceDescription": "Tjenestebeskrivelse",
+      "serviceDescriptionText": "Vår plattform bruker AI-teknologi til å analysere juridiske dokumenter, identifisere potensielt problematiske klausuler og foreslå forbedringer. Innsiktene som gis er kun for informasjonsformål og utgjør ikke juridisk rådgivning. Vi erstatter ikke lisensierte advokater.",
+      "eligibility": "Kvalifikasjoner",
+      "eligibilityText": "Du må være minst 18 år gammel og i stand til å inngå en bindende kontrakt i din jurisdiksjon for å bruke vår Tjeneste.",
+      "account": "Kontoregistrering",
+      "accountText": "Du kan bli pålagt å opprette en konto for å få tilgang til visse funksjoner. Du godtar å gi nøyaktig informasjon og holde kontolegitimasjonen din sikker. Du er ansvarlig for all aktivitet under kontoen din.",
+      "acceptableUse": "Akseptabel bruk",
+      "acceptableUseText": "Du godtar ikke å:",
+      "unlawful": "Bruke Tjenesten til ulovlige formål eller i strid med gjeldende lover;",
+      "noRight": "Laste opp dokumenter du ikke har juridisk rett til å sende inn;",
+      "reverseEngineer": "Forsøke å reversere engineering, skrape eller på annen måte misbruke plattformen;",
+      "disrupt": "Forstyrre eller forstyrre Tjenstens funksjonalitet.",
+      "userContent": "Brukerinnhold og konfidensialitet",
+      "userContentText": "Du beholder eierskapet til dokumentene og innholdet du laster opp (\"Brukerinnhold\"). Vi gjør ikke krav på eierskap over innholdet ditt. Vi behandler dokumenter sikkert og deler dem ikke med tredjeparter med mindre loven krever det.",
+      "note": "Merk: Selv om vi implementerer sterke datasikkerhetspraksis, anbefaler vi å redigere eller anonymisere svært sensitive eller personlige data før opplasting.",
+      "intellectualProperty": "Immaterielle rettigheter",
+      "intellectualPropertyText": "Tjenesten, inkludert all programvare, algoritmer og innhold (unntatt Brukerinnhold), er eiendommen til LegalEdge og beskyttet av immaterielle eiendomslover. Du kan ikke bruke vårt varemerke, kode eller innhold uten tillatelse.",
+      "disclaimer": "Ansvarsfraskrivelse for juridisk rådgivning",
+      "disclaimerText": "Tjenesten gir ikke juridisk rådgivning. Alle utganger fra vårt AI-system er automatiserte og gis kun for generell informasjon. Du bør konsultere en kvalifisert advokat for juridisk rådgivning spesifikk for din situasjon.",
+      "noWarranties": "Ingen garantier",
+      "noWarrantiesText": "Tjenesten leveres \"som den er\" og \"som tilgjengelig\". Vi gir ingen garantier, verken uttrykke eller underforståtte, inkludert men ikke begrenset til salgbarhet, egnethet for et bestemt formål eller ikke-krenkelse.",
+      "limitation": "Begrensning av ansvar",
+      "limitationText": "I den grad det er tillatt ved lov, skal LegalEdge ikke være ansvarlig for indirekte, tilfeldige, spesielle, følgeskader eller straffeskader som oppstår fra eller relatert til din bruk av Tjenesten.",
+      "termination": "Oppsigelse",
+      "terminationText": "Vi forbeholder oss retten til å suspendere eller avslutte din tilgang til Tjenesten når som helst, med eller uten varsel, for oppførsel som bryter disse Vilkårene eller er skadelig for Tjenesten eller andre brukere.",
+      "modifications": "Endringer",
+      "modificationsText": "Vi kan oppdatere disse Vilkårene fra tid til annen. Vi vil varsle deg om betydelige endringer ved å legge ut de oppdaterte Vilkårene på vår nettside. Fortsatt bruk av Tjenesten etter endringer betyr at du godtar de oppdaterte Vilkårene.",
+      "governingLaw": "Gjeldende lov",
+      "governingLawText": "Disse Vilkårene skal styres av og tolkes i samsvar med norsk lov, uten hensyn til konflikt av lovprinsipper.",
+      "contact": "Kontakt oss",
+      "contactText": "For spørsmål om disse Vilkårene, vennligst kontakt oss på:",
+      "moreInfo": "For mer informasjon om hvordan vi håndterer dine data, vennligst se vår personvernerklæring."
+    }
+  }
+}
