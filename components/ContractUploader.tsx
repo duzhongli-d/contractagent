@@ -172,16 +172,12 @@ export default function ContractUploader({ dictionary }: ContractUploaderProps) 
 							className='absolute inset-0 w-full h-full opacity-0 cursor-pointer'
 							id='contract-file'
 						/>
-						<Button
-							type='button'
-							variant='outline'
-							asChild
-							className='w-full cursor-pointer'>
-							<label htmlFor='contract-file' className='flex items-center justify-center cursor-pointer'>
-								<Upload className='mr-2 h-4 w-4' />
-								{file ? file.name : dictionary.upload.selectFile}
-							</label>
-						</Button>
+						<label
+							htmlFor='contract-file'
+							className='flex items-center justify-center w-full px-4 py-2 border rounded-md border-input bg-background hover:bg-accent hover:text-accent-foreground cursor-pointer text-sm font-medium'>
+							<Upload className='mr-2 h-4 w-4' />
+							{file ? file.name : dictionary.upload.selectFile}
+						</label>
 					</div>
 					{file && (
 						<div className='flex items-center space-x-2 my-2 text-sm text-muted-foreground'>
