@@ -80,6 +80,13 @@ locales/                # i18n translations
 utils/
 ├── stripeHelpers.ts    # Stripe amount formatting
 └── tokens.ts          # Token management utilities
+
+docs/
+└── architecture/       # Technical architecture diagrams (Mermaid)
+    ├── README.md
+    ├── SYSTEM_OVERVIEW.md
+    ├── DATA_FLOW.md
+    └── COMPONENT_INTERACTIONS.md
 ```
 
 ### Authentication Flow
@@ -140,6 +147,8 @@ Events tracked:
 
 Clerk middleware for route protection (`proxy.ts`). Protected routes: `/liveAnalyser/*`, `/buytokens/*`
 
+**Note:** Route protection is defined in `proxy.ts` (not the default `middleware.ts`).
+
 ### i18n Structure
 
 Translations are managed in `locales/` with JSON files per language:
@@ -148,6 +157,14 @@ Translations are managed in `locales/` with JSON files per language:
 - `nb.json` - Norwegian translations
 
 Routes use locale prefix: `/en`, `/zh`, or `/nb`. Default is `zh`.
+
+### Architecture Documentation
+
+Architecture diagrams are maintained in `docs/architecture/`:
+- **[README.md](../../docs/architecture/README.md)** - Index with ASCII overview and links
+- **[SYSTEM_OVERVIEW.md](../../docs/architecture/SYSTEM_OVERVIEW.md)** - High-level system architecture, Mermaid diagrams
+- **[DATA_FLOW.md](../../docs/architecture/DATA_FLOW.md)** - Contract analysis pipeline, Stripe payment flow
+- **[COMPONENT_INTERACTIONS.md](../../docs/architecture/COMPONENT_INTERACTIONS.md)** - C4-style component diagrams
 
 ## Key Configuration
 
