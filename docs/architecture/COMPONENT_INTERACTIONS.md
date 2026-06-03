@@ -20,19 +20,19 @@ graph LR
 
     subgraph ServerActions["Server Actions Layer"]
         Analyze["analyzeTXTContract()<br/>analyzeContractsTXT.ts"]
-        StripeAction["createCheckoutSession()<br/>stripe.ts"]
-        StripeIntent["createPaymentIntent()<br/>stripe.ts"]
+        AlipayAction["createAlipayOrder()<br/>alipay.ts"]
+        AlipayIntent["createPaymentIntent()<br/>alipay.ts"]
     end
 
     subgraph APIRoutes["API Routes Layer"]
-        StripeWebhook["POST /api/webhooks/stripe<br/>route.ts"]
+        AlipayWebhook["POST /api/webhooks/alipay<br/>route.ts"]
         UserSignup["POST /api/usersignup<br/>route.ts"]
         TokenAPI["GET /api/tokens<br/>route.ts"]
     end
 
     subgraph External["External Services"]
         OpenAI_API["OpenAI API"]
-        Stripe_API["Stripe API"]
+        Alipay_API["Alipay API"]
         Clerk_API["Clerk Auth API"]
         PostgreSQL_DB["PostgreSQL Database"]
         PostHog_AN["PostHog Analytics"]
@@ -40,11 +40,11 @@ graph LR
     end
 
     SPA -->|"formData"| Analyze
-    SPA -->|"FormData"| StripeAction
-    SPA -->|"FormData"| StripeIntent
+    SPA -->|"FormData"| AlipayAction
+    SPA -->|"FormData"| AlipayIntent
 
     Auth -->|"userId"| Analyze
-    Auth -->|"userId"| StripeAction
+    Auth -->|"userId"| AlipayAction
 
     State -->|"quota update"| SPA
 
@@ -52,13 +52,13 @@ graph LR
     Analyze -->|"update quota"| PostgreSQL_DB
     Analyze -->|"event", "event"| PostHog_AN
 
-    StripeAction -->|"checkout.session"| Stripe_API
-    StripeAction -->|"event"| PostHog_AN
+    AlipayAction -->|"checkout.session"| Alipay_API
+    AlipayAction -->|"event"| PostHog_AN
 
-    StripeWebhook -->|"webhook verification"| Stripe_API
-    StripeWebhook -->|"read session"| Stripe_API
-    StripeWebhook -->|"update quota"| PostgreSQL_DB
-    StripeWebhook -->|"purchase event"| PostHog_AN
+    AlipayWebhook -->|"webhook verification"| Alipay_API
+    AlipayWebhook -->|"read session"| Alipay_API
+    AlipayWebhook -->|"update quota"| PostgreSQL_DB
+    AlipayWebhook -->|"purchase event"| PostHog_AN
 
     TokenAPI -->|"query quota"| PostgreSQL_DB
 
@@ -71,8 +71,8 @@ graph LR
 | Action | File | External Calls | Return Type |
 |--------|------|----------------|-------------|
 | `analyzeTXTContract(formData)` | `analyzeContractsTXT.ts` | OpenAI threads, PostgreSQL update | `{ data: Message, error: string \| null }` |
-| `createCheckoutSession(formData)` | `stripe.ts` | Stripe checkout.sessions.create | `{ client_secret: string \| null, url: string \| null }` |
-| `createPaymentIntent(formData)` | `stripe.ts` | Stripe paymentIntents.create | `{ client_secret: string }` |
+| `createAlipayOrder(formData)` | `alipay.ts` | Alipay trade create | `{ trade_no: string \| null, payment_url: string \| null }` |
+| `createPaymentIntent(formData)` | `alipay.ts` | Alipay trade page pay | `{ trade_no: string }` |
 
 ---
 
@@ -83,10 +83,10 @@ graph TB
     subgraph NextJSApp["Next.js Application"]
         subgraph Actions["Server Actions"]
             SA1["analyzeContractsTXT.ts"]
-            SA2["stripe.ts"]
+            SA2["alipay.ts"]
         end
         subgraph APIs["API Routes"]
-            AR1["webhooks/stripe"]
+            AR1["webhooks/alipay"]
             AR2["usersignup"]
             AR3["tokens"]
         end
@@ -99,9 +99,9 @@ graph TB
         OM["Messages"]
     end
 
-    subgraph Stripe_Integration["Stripe Integration"]
-        SC["Checkout Sessions"]
-        PI["Payment Intents"]
+    subgraph Alipay_Integration["Alipay Integration"]
+        AC["Trade Create"]
+        AP["Trade Page Pay"]
         WH["Webhooks"]
     end
 
@@ -122,11 +122,17 @@ graph TB
         RE["Resend"]
     end
 
+    subgraph Testing["E2E Testing"]
+        PW["Playwright Test Runner"]
+        POM["Page Objects"]
+        SPEC["Test Specifications"]
+    end
+
     SA1 -->|"create thread|run|message"| OA
     OA --> OT --> OR --> OM
 
-    SA2 -->|"checkout.sessions.create"| SC
-    SA2 -->|"paymentIntents.create"| PI
+    SA2 -->|"alipay.trade.create"| AC
+    SA2 -->|"alipay.trade.page.pay"| AP
 
     AR1 -->|"verify|retrieve"| WH
     WH --> SC
@@ -143,6 +149,9 @@ graph TB
     PR -->|"ORM"| DB
 
     RE -.->|"email notifications"| AR2
+
+    PW -.->|"E2E tests"| NextJSApp
+    SPEC -.->|"assertions"| NextJSApp
 ```
 
 ### Integration Authentication Methods
@@ -151,7 +160,7 @@ graph TB
 |---------|---------------------|---------------------|
 | **OpenAI** | API Key | `OPENAI_API_KEY` |
 | **OpenAI Assistant** | Assistant ID | `OPENAI_ASSISTANT_ID`, `OPENAI_PREMIUM_ASSISTANT_ID` |
-| **Stripe** | API Key + Webhook Secret | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` |
+| **Alipay** | App ID + Private Key + Public Key | `ALIPAY_APP_ID`, `ALIPAY_PRIVATE_KEY`, `ALIPAY_ALIPAY_PUBLIC_KEY` |
 | **Clerk** | Publishable Key + Secret | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` |
 | **PostgreSQL (Prisma)** | Connection String | `DATABASE_URL` |
 | **PostHog** | Project API Key | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` |
@@ -172,10 +181,10 @@ erDiagram
 
     USER_QUERIES ||--o{ PURCHASE : "generates"
     PURCHASE {
-        string checkout_session_id
+        string out_trade_no
         string user_id
         int token_amount
-        float total_amount_nok
+        float total_amount_cny
         timestamp created_at
     }
 
@@ -250,33 +259,33 @@ sequenceDiagram
     participant User
     participant Browser
     participant NextJS
-    participant Stripe
+    participant Alipay
     participant Clerk
     participant PostgreSQL
 
     User->>Browser: Click Purchase
-    Browser->>NextJS: createCheckoutSession(formData)
+    Browser->>NextJS: createAlipayOrder(formData)
     NextJS->>Clerk: auth().userId
     Clerk-->>NextJS: userId
 
-    NextJS->>Stripe: checkout.sessions.create({
-        line_items, client_reference_id: userId
+    NextJS->>Alipay: alipay.trade.create({
+        out_trade_no, total_amount, subject
     })
-    Stripe-->>NextJS: session { id, url }
+    Alipay-->>NextJS: trade { trade_no, qr_code }
 
-    NextJS-->>Browser: { url }
+    NextJS-->>Browser: { qr_code }
 
-    Browser->>Stripe: Redirect to session.url
-    User->>Stripe: Complete payment
-    Stripe->>Browser: Redirect to /buytokens/success
+    Browser->>Alipay: Display QR code / Redirect to WAP
+    User->>Alipay: Complete payment
+    Alipay->>Browser: Redirect to /buytokens/success
 
-    Note over Browser,Stripe: Meanwhile, webhook fires
-    Stripe->>NextJS: POST /api/webhooks/stripe
-    NextJS->>Stripe: Verify signature
-    NextJS->>Stripe: Retrieve session
-    Stripe-->>NextJS: session details
+    Note over Browser,Alipay: Meanwhile, webhook fires
+    Alipay->>NextJS: POST /api/webhooks/alipay
+    NextJS->>Alipay: Verify signature
+    NextJS->>Alipay: Get trade status
+    Alipay-->>NextJS: trade details
 
-    NextJS->>PostgreSQL: Find user by client_reference_id
+    NextJS->>PostgreSQL: Find user by out_trade_no
     PostgreSQL-->>NextJS: userRecord
 
     NextJS->>PostgreSQL: Update document_quota_left += tokens
@@ -295,24 +304,24 @@ graph TD
     useLocale["useLocale.tsx<br/>i18n hook"]
 
     analyzeAction["analyzeContractsTXT.ts<br/>Server Action"]
-    stripeAction["stripe.ts<br/>Server Action"]
+    alipayAction["alipay.ts<br/>Server Action"]
 
     Proxy["proxy.ts<br/>Clerk Middleware"]
-    StripeWebhook["webhooks/stripe/route.ts<br/>API Route"]
+    AlipayWebhook["webhooks/alipay/route.ts<br/>API Route"]
 
     ContractUploader --> TokenContext
     ContractUploader --> analyzeAction
     MarkdownRenderer --> TokenContext
 
     analyzeAction --> Proxy
-    stripeAction --> Proxy
+    alipayAction --> Proxy
 
     Proxy --> Clerk_Ext["Clerk Auth"]
     analyzeAction --> OpenAI_Ext["OpenAI API"]
     analyzeAction --> PostgreSQL_Ext["PostgreSQL DB"]
-    stripeAction --> Stripe_Ext["Stripe API"]
-    StripeWebhook --> Stripe_Ext
-    StripeWebhook --> PostgreSQL_Ext
+    alipayAction --> Alipay_Ext["Alipay API"]
+    AlipayWebhook --> Alipay_Ext
+    AlipayWebhook --> PostgreSQL_Ext
 ```
 
 ### Dependency Summary
@@ -324,8 +333,9 @@ graph TD
 | `TokenContext.tsx` | PostgreSQL (via `/api/tokens`) |
 | `proxy.ts` (middleware) | Clerk API |
 | `analyzeContractsTXT.ts` | Clerk (auth), PostgreSQL, OpenAI, PostHog |
-| `stripe.ts` | Clerk (auth), Stripe, PostHog |
-| `webhooks/stripe/route.ts` | Stripe (webhook verification), PostgreSQL, PostHog |
+| `alipay.ts` | Clerk (auth), Alipay, PostHog |
+| `webhooks/alipay/route.ts` | Alipay (webhook verification), PostgreSQL, PostHog |
+| **E2E Tests** | Playwright, Page Objects, Next.js app (baseURL) |
 
 ---
 

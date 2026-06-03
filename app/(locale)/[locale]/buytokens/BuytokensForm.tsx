@@ -2,8 +2,9 @@
 
 import type React from 'react';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
 	Card,
 	CardContent,
@@ -14,8 +15,10 @@ import {
 } from '@/components/ui/card';
 import { ArrowLeft, Shield } from 'lucide-react';
 import TokenSelector from '@/components/stripe/shadcn/token-selector';
-import StripeCheckoutButton from '@/components/stripe/shadcn/stripe-checkout-button';
-import { NOKPERTOKEN, DISCOUNT_TIERS } from '@/config';
+import { createAlipayOrder } from '@/app/actions/alipay';
+import { CNY_PER_TOKEN, DISCOUNT_TIERS } from '@/config';
+import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 interface BuytokensDict {
 	title: string;
@@ -37,6 +40,8 @@ interface BuytokensDict {
 	supportPaymentMethods: string;
 	perUnit: string;
 	tokens: string;
+	payWithAlipay: string;
+	approxUsd: string;
 	tokenSelector: {
 		title: string;
 		description: string;
@@ -52,23 +57,45 @@ interface BuytokensDict {
 }
 
 export function BuytokensForm({ dictionary }: { dictionary: BuytokensDict }) {
+	const router = useRouter();
 	const [tokenCount, setTokenCount] = useState(100);
+	const [loading, setLoading] = useState(false);
+	const [usdRate, setUsdRate] = useState<number>(0.14);
+
+	useEffect(() => {
+		fetch('https://api.frankfurter.app/latest?from=CNY&to=USD')
+			.then((res) => res.json())
+			.then((data) => setUsdRate(data.rates?.USD || 0.14))
+			.catch(() => setUsdRate(0.14));
+	}, []);
 
 	const getDiscountedPrice = (count: number) => {
-		let pricePerToken = NOKPERTOKEN;
+		let pricePerToken = CNY_PER_TOKEN;
 
 		if (count >= DISCOUNT_TIERS.HIGH_VOLUME.threshold) {
-			pricePerToken = NOKPERTOKEN * (1 - DISCOUNT_TIERS.HIGH_VOLUME.discount);
+			pricePerToken = CNY_PER_TOKEN * (1 - DISCOUNT_TIERS.HIGH_VOLUME.discount);
 		} else if (count >= DISCOUNT_TIERS.MEDIUM_VOLUME.threshold) {
-			pricePerToken = NOKPERTOKEN * (1 - DISCOUNT_TIERS.MEDIUM_VOLUME.discount);
+			pricePerToken = CNY_PER_TOKEN * (1 - DISCOUNT_TIERS.MEDIUM_VOLUME.discount);
 		} else if (count >= DISCOUNT_TIERS.LOW_VOLUME.threshold) {
-			pricePerToken = NOKPERTOKEN * (1 - DISCOUNT_TIERS.LOW_VOLUME.discount);
+			pricePerToken = CNY_PER_TOKEN * (1 - DISCOUNT_TIERS.LOW_VOLUME.discount);
 		}
 
 		return count * pricePerToken;
 	};
 
 	const totalPrice = getDiscountedPrice(tokenCount);
+	const usdReference = (totalPrice * usdRate).toFixed(2);
+
+	const handlePurchase = async () => {
+		setLoading(true);
+		const result = await createAlipayOrder({ tokenCount, basePrice: totalPrice });
+		if (result.success && result.payUrl) {
+			window.location.href = result.payUrl;
+		} else {
+			alert(result.error || 'Payment failed');
+			setLoading(false);
+		}
+	};
 
 	return (
 		<div className='min-h-screen bg-background'>
@@ -86,8 +113,8 @@ export function BuytokensForm({ dictionary }: { dictionary: BuytokensDict }) {
 						<TokenSelector
 							tokenCount={tokenCount}
 							setTokenCount={setTokenCount}
-							pricePerToken={2}
-							currency='NOK'
+							pricePerToken={CNY_PER_TOKEN}
+							currency='CNY'
 							dictionary={{
 								title: dictionary.tokenSelector.title,
 								description: dictionary.tokenSelector.description,
@@ -109,9 +136,9 @@ export function BuytokensForm({ dictionary }: { dictionary: BuytokensDict }) {
 							<CardContent className='space-y-4'>
 								<div className='flex justify-between'>
 									<span className='text-gray-500'>
-										{tokenCount} {dictionary.tokens} ({NOKPERTOKEN} NOK {dictionary.perUnit})
+										{tokenCount} {dictionary.tokens} ({CNY_PER_TOKEN} CNY {dictionary.perUnit})
 									</span>
-									<span>{tokenCount * 2} NOK</span>
+									<span>{tokenCount * CNY_PER_TOKEN} CNY</span>
 								</div>
 
 								{tokenCount >= 100 && (
@@ -124,14 +151,14 @@ export function BuytokensForm({ dictionary }: { dictionary: BuytokensDict }) {
 												? ' (10%)'
 												: ' (5%)'}
 										</span>
-										<span>-{(tokenCount * 2 - totalPrice).toFixed(2)} NOK</span>
+										<span>-{(tokenCount * CNY_PER_TOKEN - totalPrice).toFixed(2)} CNY</span>
 									</div>
 								)}
 
 								<div className='flex justify-between border-t pt-4'>
 									<span className='font-medium'>{dictionary.total}</span>
 									<span className='font-bold text-blue-600'>
-										{totalPrice.toFixed(2)} NOK
+										{totalPrice.toFixed(2)} CNY
 									</span>
 								</div>
 							</CardContent>
@@ -152,22 +179,25 @@ export function BuytokensForm({ dictionary }: { dictionary: BuytokensDict }) {
 								</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<StripeCheckoutButton
-									tokenCount={tokenCount}
-									totalAmount={totalPrice}
-									dictionary={{
-										minimumAmountError: dictionary.minimumAmountError,
-										redirectingToStripe: dictionary.redirectingToStripe,
-										checkoutWithStripe: dictionary.checkoutWithStripe,
-									}}
-								/>
+								<Button
+									onClick={handlePurchase}
+									disabled={loading}
+									className='w-full'
+									size='lg'>
+									{loading ? (
+										<>
+											<Loader2 className='mr-2 h-4 w-4 animate-spin' />
+											Loading...
+										</>
+									) : (
+										dictionary.payWithAlipay || 'Pay with Alipay'
+									)}
+								</Button>
 							</CardContent>
 							<CardFooter className='flex flex-col gap-4 border-t pt-6'>
 								<div className='flex items-center justify-center gap-2'>
-									<div className='flex gap-2'>
-									</div>
 									<span className='text-sm text-gray-500'>
-										{dictionary.payWith}
+										{dictionary.approxUsd || 'Approx.'} ${usdReference} USD
 									</span>
 								</div>
 							</CardFooter>

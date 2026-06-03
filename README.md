@@ -6,9 +6,9 @@ AI-powered contract analysis SaaS. Upload PDF contracts and get instant legal in
 
 - **AI Contract Analysis** - Upload contracts and receive detailed analysis with identified risks and recommendations
 - **Multi-language Support** - Available in English, Chinese, and Norwegian
-- **Token-based Pricing** - Pay only for what you use (2 NOK per token)
+- **Token-based Pricing** - Pay only for what you use (1 CNY per token)
 - **Secure Authentication** - Powered by Clerk
-- **Stripe Integration** - Purchase tokens securely
+- **Alipay Integration** - Purchase tokens securely
 
 ## Tech Stack
 
@@ -16,7 +16,7 @@ AI-powered contract analysis SaaS. Upload PDF contracts and get instant legal in
 - **AI**: OpenAI Assistants API
 - **Database**: PostgreSQL with Prisma ORM
 - **Auth**: Clerk
-- **Payments**: Stripe
+- **Payments**: Alipay
 - **Analytics**: PostHog
 - **Styling**: Tailwind CSS with shadcn/ui components
 
@@ -55,10 +55,10 @@ CLERK_SECRET_KEY=
 # PostgreSQL (used by Prisma)
 DATABASE_URL=postgresql://user:password@localhost:5432/contractagent
 
-# Stripe
-NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
+# Alipay
+ALIPAY_APP_ID=
+ALIPAY_PRIVATE_KEY=
+ALIPAY_ALIPAY_PUBLIC_KEY=
 ```
 
 ## Project Structure

@@ -66,7 +66,7 @@ export default function LocaleSwitcher() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant='outline' size='sm' className='gap-2'>
+				<Button variant='outline' size='sm' className='gap-2' data-testid='locale-switcher'>
 					<Globe className='h-4 w-4' />
 					<span className='uppercase'>{currentLocale}</span>
 				</Button>

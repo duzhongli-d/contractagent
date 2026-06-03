@@ -261,6 +261,8 @@
     "supportPaymentMethods": "支持所有主要支付方式",
     "perUnit": "每枚",
     "tokens": "令牌",
+    "payWithAlipay": "使用支付宝支付",
+    "approxUsd": "约",
     "tokenSelector": {
       "title": "选择令牌数量",
       "description": "选择您想要购买的令牌数量。每个令牌只需2元，即可分析一份文档。",

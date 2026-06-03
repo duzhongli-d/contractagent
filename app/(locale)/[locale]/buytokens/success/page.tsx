@@ -9,7 +9,8 @@ import {
 	CardTitle,
 } from '@/components/ui/card';
 import { CheckCircle, ArrowRight } from 'lucide-react';
-import { NOKPERTOKEN } from '@/config';
+import { CNY_PER_TOKEN } from '@/config';
+import { prisma } from '@/lib/db';
 
 type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
@@ -30,18 +31,20 @@ interface BuytokensSuccessDict {
 
 export default async function ResultPage(props: { searchParams: SearchParams }) {
 	const searchParams = await props.searchParams;
-	const locale = 'nb'; // Default to Norwegian
+	const locale = 'nb';
 
 	const dictModule = await import(`@/locales/${locale}/common.json`);
 	const dict: BuytokensSuccessDict = dictModule.default.buytokens.success;
 
-	if (!searchParams.session_id) {
+	const outTradeNo = searchParams.out_trade_no;
+
+	if (!outTradeNo || typeof outTradeNo !== 'string') {
 		return (
 			<div className='min-h-screen flex items-center justify-center bg-gray-50 p-4'>
 				<Card className='w-full max-w-md'>
 					<CardHeader className='text-center'>
-						<CardTitle className='text-2xl text-red-600'>Missing session ID</CardTitle>
-						<CardDescription>Please provide a valid session_id</CardDescription>
+						<CardTitle className='text-2xl text-red-600'>Missing order number</CardTitle>
+						<CardDescription>Please provide a valid out_trade_no</CardDescription>
 					</CardHeader>
 					<CardFooter>
 						<Button asChild className='w-full'>
@@ -53,19 +56,28 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 		);
 	}
 
-	const { stripe } = await import('@/lib/stripe');
-	const checkoutSession = await stripe.checkout.sessions.retrieve(
-		typeof searchParams.session_id === 'string' ? searchParams.session_id : '',
-		{
-			expand: ['line_items', 'payment_intent'],
-		},
-	);
+	// Get order from database
+	const order = await prisma.alipayOrder.findUnique({
+		where: { outTradeNo },
+	});
 
-	const lineItemName = checkoutSession.line_items?.data[0].description;
-	if (!lineItemName) {
-		throw new Error('No line items found');
+	if (!order) {
+		return (
+			<div className='min-h-screen flex items-center justify-center bg-gray-50 p-4'>
+				<Card className='w-full max-w-md'>
+					<CardHeader className='text-center'>
+						<CardTitle className='text-2xl text-red-600'>Order not found</CardTitle>
+						<CardDescription>The order could not be found in our system.</CardDescription>
+					</CardHeader>
+					<CardFooter>
+						<Button asChild className='w-full'>
+							<Link href={`/${locale}/buytokens`}>Go back to purchase page</Link>
+						</Button>
+					</CardFooter>
+				</Card>
+			</div>
+		);
 	}
-	const tokensBought = parseInt(lineItemName.split(' ')[1]);
 
 	return (
 		<div className='min-h-screen flex items-center justify-center bg-gray-50 p-4'>
@@ -85,14 +97,14 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 						<div className='text-center space-y-2'>
 							<p className='text-sm text-gray-500'>{dict.tokensBought}</p>
 							<p className='text-3xl font-bold text-blue-600'>
-								{tokensBought} Tokens
+								{order.tokenCount} Tokens
 							</p>
 
 							<div className='text-sm'>
-								<p className='text-gray-500'>{dict.basePrice}: {NOKPERTOKEN} NOK</p>
+								<p className='text-gray-500'>{dict.basePrice}: {CNY_PER_TOKEN} CNY</p>
 
 								<p className='font-medium mt-1'>
-									{dict.totalPaid}: {checkoutSession.amount_total! / 100} NOK
+									{dict.totalPaid}: {order.amount} CNY
 								</p>
 							</div>
 						</div>
@@ -102,15 +114,15 @@ export default async function ResultPage(props: { searchParams: SearchParams }) 
 						<h3 className='text-sm font-medium'>{dict.orderDetails}</h3>
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>{dict.orderId}</span>
-							<span>{checkoutSession.id.slice(9, 18)}-...</span>
+							<span>{order.outTradeNo.slice(-12)}-...</span>
 						</div>
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>{dict.date}</span>
-							<span>{new Date(checkoutSession.created * 1000).toLocaleString()}</span>
+							<span>{order.createdAt.toLocaleString()}</span>
 						</div>
 						<div className='flex justify-between text-sm'>
 							<span className='text-gray-500'>{dict.paymentMethod}</span>
-							<span>Credit Card</span>
+							<span>Alipay</span>
 						</div>
 					</div>
 				</CardContent>

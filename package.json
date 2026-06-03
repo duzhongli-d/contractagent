@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:headed": "playwright test --headed"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.37.0",
@@ -24,6 +27,7 @@
     "@stripe/react-stripe-js": "^3.5.0",
     "@stripe/stripe-js": "^6.1.0",
     "@types/stripe": "^8.0.416",
+    "alipay-sdk": "^4.14.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.477.0",
@@ -44,6 +48,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/pdf-parse": "^1.1.4",

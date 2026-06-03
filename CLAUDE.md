@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**LegalEdge AI** is a Next.js 16 TypeScript SaaS application providing AI-powered contract analysis using OpenAI's Assistants API. Users upload PDF contracts, which are analyzed and presented with insights, risks, and recommendations. The app uses a token-based payment system (2 NOK per token) with Stripe integration.
+**LegalEdge AI** is a Next.js 16 TypeScript SaaS application providing AI-powered contract analysis using OpenAI's Assistants API. Users upload PDF contracts, which are analyzed and presented with insights, risks, and recommendations. The app uses a token-based payment system (1 CNY per token) with Alipay integration.
 
 ## Common Development Commands
 
@@ -34,11 +34,11 @@ Run `npm run dev` and visit http://localhost:3000. The dev server uses Turbopack
 app/                    # Next.js App Router
 ├── actions/           # Server Actions (secure backend logic)
 │   ├── analyzeContractsTXT.ts
-│   ├── stripe.ts
+│   ├── alipay.ts
 │   ├── tokens.ts
 │   └── resend.ts
 ├── api/               # API Routes
-│   ├── webhooks/stripe/
+│   ├── webhooks/alipay/
 │   ├── usersignup/
 │   └── tokens/
 ├── (locale)/          # i18n route groups
@@ -52,7 +52,7 @@ app/                    # Next.js App Router
 
 components/            # UI Components
 └── ui/                 # shadcn/ui component library
-├── stripe/            # Stripe checkout components
+├── alipay/            # Alipay checkout components
 └── email/             # Email templates (Resend)
 
 config/
@@ -66,7 +66,7 @@ hooks/
 
 lib/
 ├── utils.ts            # Shared utilities
-├── stripe.ts           # Stripe initialization
+├── alipay.ts           # Alipay initialization
 └── i18n/              # i18n configuration and dictionary loader
 
 locales/                # i18n translations
@@ -75,7 +75,7 @@ locales/                # i18n translations
 └── nb.json
 
 utils/
-├── stripeHelpers.ts    # Stripe amount formatting
+├── alipayHelpers.ts    # Alipay amount formatting
 └── tokens.ts          # Token management utilities
 
 docs/
@@ -108,15 +108,15 @@ Key files:
 
 ### Payment & Token System
 
-- **Token Cost**: 2 NOK per token (configurable in `config/index.ts`)
+- **Token Cost**: 1 CNY per token (configurable in `config/index.ts`)
 - **Standard Query**: 1 token
 - **Premium Query**: 4 tokens
 - **Starting Quota**: 2 tokens for new users
-- **Payment Flow**: Stripe Checkout → Webhook (`/api/webhooks/stripe`) → PostgreSQL update
+- **Payment Flow**: Alipay Checkout → Webhook (`/api/webhooks/alipay`) → PostgreSQL update
 
 Key files:
-- `app/actions/stripe.ts` - Stripe integration
-- `app/api/webhooks/stripe/route.ts` - Payment webhook handler
+- `app/actions/alipay.ts` - Alipay integration
+- `app/api/webhooks/alipay/route.ts` - Payment webhook handler
 - `config/index.ts` - Pricing constants
 
 ### Database Schema (PostgreSQL with Prisma)
@@ -133,7 +133,7 @@ Key files:
 Events tracked:
 - `Document Analyzed` - When a contract is analyzed
 - `purchase` - When tokens are purchased
-- `checkout_session_created` - When Stripe checkout starts
+- `checkout_session_created` - When Alipay checkout starts
 - `contact_form_submitted` - When contact form is submitted
 
 ### Discount Tiers (for token purchases)
@@ -162,7 +162,7 @@ Routes use locale prefix: `/en`, `/zh`, or `/nb`. Default is `zh`.
 Architecture diagrams are maintained in `docs/architecture/`:
 - **[README.md](../../docs/architecture/README.md)** - Index with ASCII overview and links
 - **[SYSTEM_OVERVIEW.md](../../docs/architecture/SYSTEM_OVERVIEW.md)** - High-level system architecture, Mermaid diagrams
-- **[DATA_FLOW.md](../../docs/architecture/DATA_FLOW.md)** - Contract analysis pipeline, Stripe payment flow
+- **[DATA_FLOW.md](../../docs/architecture/DATA_FLOW.md)** - Contract analysis pipeline, Alipay payment flow
 - **[COMPONENT_INTERACTIONS.md](../../docs/architecture/COMPONENT_INTERACTIONS.md)** - C4-style component diagrams
 
 ## Key Configuration
@@ -173,7 +173,7 @@ Required in `.env.local`:
 - **OpenAI**: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`, `OPENAI_PREMIUM_ASSISTANT_ID`
 - **Clerk**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`
 - **PostgreSQL**: `DATABASE_URL` (Prisma connection string)
-- **Stripe**: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
+- **Alipay**: `ALIPAY_APP_ID`, `ALIPAY_PRIVATE_KEY`, `ALIPAY_ALIPAY_PUBLIC_KEY`
 - **PostHog**: `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
 - **Resend**: `RESEND_API_KEY`
 
@@ -183,7 +183,7 @@ Required in `.env.local`:
 TOKENS_PER_QUERY = 1
 TOKENS_PER_PREMIUM_QUERY = 4
 START_TOKENS = 2
-NOKPERTOKEN = 2
+CNYPERTOKEN = 1
 ```
 
 ### File Upload Limits
@@ -197,10 +197,10 @@ Configured in `next.config.ts`:
 
 **Server Actions** (`app/actions/`):
 - Contract analysis (`analyzeContractsTXT.ts`)
-- Stripe integration (`stripe.ts`)
+- Alipay integration (`alipay.ts`)
 
 **API Routes** (`app/api/`):
-- Webhooks (Stripe, Clerk user signup)
+- Webhooks (Alipay, Clerk user signup)
 - Token retrieval (`/api/tokens`)
 
 ## API Reference
@@ -208,10 +208,10 @@ Configured in `next.config.ts`:
 ### Server Actions
 
 - `analyzeTXTContract(formData)` - Analyze PDF contract
-- `createCheckoutSession(data)` - Create Stripe checkout
+- `createAlipayOrder(data)` - Create Alipay order
 
 ### API Routes
 
 - `GET /api/tokens` - Get user's token quota (authenticated)
-- `POST /api/webhooks/stripe` - Handle Stripe payment webhooks
+- `POST /api/webhooks/alipay` - Handle Alipay payment webhooks
 - `POST /api/usersignup` - Handle Clerk user signup webhooks

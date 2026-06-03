@@ -246,6 +246,8 @@
       "tokens": "Tokens",
       "perDocument": "og lar deg analysere ett dokument."
     },
+    "payWithAlipay": "Betal med Alipay",
+    "approxUsd": "Ca.",
     "success": {
       "title": "Betaling vellykket!",
       "subtitle": "Betalingen prosessert gjennom Stripe",
