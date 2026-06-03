@@ -22,6 +22,8 @@ interface BuytokensDict {
 	supportPaymentMethods: string;
 	perUnit: string;
 	tokens: string;
+	payWithAlipay: string;
+	approxUsd: string;
 	tokenSelector: {
 		title: string;
 		description: string;

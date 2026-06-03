@@ -1,6 +1,10 @@
-import { test as base } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
 
-export const test = base.extend({
+type MyFixtures = {
+  authenticatedPage: Page;
+};
+
+export const test = base.extend<MyFixtures>({
   // Authenticated page fixture - TODO: Implement Clerk authentication fixture
   // Will use Clerk test helpers or cookie injection
   authenticatedPage: async ({ page, baseURL }, use) => {

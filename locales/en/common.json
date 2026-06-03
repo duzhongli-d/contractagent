@@ -261,6 +261,8 @@
     "supportPaymentMethods": "Support for all major payment methods",
     "perUnit": "per unit",
     "tokens": "Tokens",
+    "payWithAlipay": "Pay with Alipay",
+    "approxUsd": "Approx.",
     "tokenSelector": {
       "title": "Select Token Amount",
       "description": "Select how many tokens you want to buy. Each Token costs 2 NOK",

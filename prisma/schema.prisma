@@ -16,3 +16,17 @@ model UserQuota {
 
   @@map("user_queries")
 }
+
+model AlipayOrder {
+  id            String   @id @default(cuid())
+  outTradeNo    String   @unique @map("out_trade_no")
+  alipayTradeNo String   @unique @map("alipay_trade_no")
+  clerkUserId   String   @map("clerk_user_id")
+  tokenCount    Int
+  amount        Float
+  status        String   @default("pending")
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@map("alipay_orders")
+}
