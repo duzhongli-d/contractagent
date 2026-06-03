@@ -7,26 +7,60 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model UserQuota {
-  clerk_user_id       String   @id @map("clerk_user_id")
-  document_quota_left Int      @default(2) @map("document_quota_left")
-  documents_analysed  Int      @default(0) @map("documents_analysed")
-  created_at          DateTime @default(now()) @map("created_at")
-  updated_at          DateTime @updatedAt @map("updated_at")
-
-  @@map("user_queries")
+model User {
+  id            String    @id @default(cuid())
+  email         String?   @unique
+  phone         String?   @unique
+  wechatId      String?   @unique
+  alipayId      String?   @unique
+  googleId      String?   @unique
+  emailVerified DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  queries       UserQuery[]
 }
 
-model AlipayOrder {
-  id            String   @id @default(cuid())
-  outTradeNo    String   @unique @map("out_trade_no")
-  alipayTradeNo String   @unique @map("alipay_trade_no")
-  clerkUserId   String   @map("clerk_user_id")
-  tokenCount    Int
-  amount        Float
-  status        String   @default("pending")
-  createdAt     DateTime @default(now()) @map("created_at")
-  updatedAt     DateTime @updatedAt @map("updated_at")
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@map("alipay_orders")
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model UserQuery {
+  id                 String   @id @default(cuid())
+  clerkUserId        String?  @unique
+  userId             String?
+  documentQuotaLeft  Int      @default(2)
+  documentsAnalysed  Int      @default(0)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+  user               User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
