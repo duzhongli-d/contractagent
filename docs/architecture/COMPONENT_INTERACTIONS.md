@@ -70,7 +70,7 @@ graph LR
 
 | Action | File | External Calls | Return Type |
 |--------|------|----------------|-------------|
-| `analyzeTXTContract(formData)` | `analyzeContractsTXT.ts` | OpenAI threads, Appwrite update | `{ data: Message, error: string \| null }` |
+| `analyzeTXTContract(formData)` | `analyzeContractsTXT.ts` | OpenAI threads, PostgreSQL update | `{ data: Message, error: string \| null }` |
 | `createCheckoutSession(formData)` | `stripe.ts` | Stripe checkout.sessions.create | `{ client_secret: string \| null, url: string \| null }` |
 | `createPaymentIntent(formData)` | `stripe.ts` | Stripe paymentIntents.create | `{ client_secret: string }` |
 
@@ -207,8 +207,8 @@ sequenceDiagram
     NextJS->>Clerk: auth().userId
     Clerk-->>NextJS: userId
 
-    NextJS->>Appwrite: listDocuments(query: clerk_user_id)
-    Appwrite-->>NextJS: userQuota
+    NextJS->>PostgreSQL: listDocuments(query: clerk_user_id)
+    PostgreSQL-->>NextJS: userQuota
 
     alt quota > 0
         NextJS->>Browser: Accept file
@@ -231,8 +231,8 @@ sequenceDiagram
         NextJS->>OpenAI: messages.list(threadId)
         OpenAI-->>NextJS: messages
 
-        NextJS->>Appwrite: updateDocument(quota - 1)
-        Appwrite-->>NextJS: updated
+        NextJS->>PostgreSQL: updateDocument(quota - 1)
+        PostgreSQL-->>NextJS: updated
 
         NextJS->>Browser: Return { data: response }
     else quota = 0

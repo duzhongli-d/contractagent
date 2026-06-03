@@ -124,7 +124,7 @@ sequenceDiagram
     User->>Stripe: Enter payment details
     User->>Stripe: Confirm payment
 
-    Note over User,Appwrite: Payment Processing
+    Note over User,PostgreSQL: Payment Processing
 
     Stripe->>NextJS: POST /api/webhooks/stripe
     Note right of NextJS: Verify webhook signature
@@ -135,7 +135,7 @@ sequenceDiagram
     PostgreSQL->>NextJS: Confirm update
     NextJS->>Stripe: Return 200 OK
 
-    Note over User,Appwrite: Post-Purchase
+    Note over User,PostgreSQL: Post-Purchase
 
     Stripe->>Browser: Redirect to /buytokens/success
     Browser->>NextJS: Request success page

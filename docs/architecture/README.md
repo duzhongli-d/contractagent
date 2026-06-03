@@ -56,11 +56,11 @@
 ┌────────────────────────────────┴────────────────────────────────────────┐
 │                        EXTERNAL SERVICES                                │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────┐ │
-│  │ OpenAI  │  │ Stripe  │  │ Clerk   │  │Appwrite │  │ PostHog     │ │
+│  │ OpenAI  │  │ Stripe  │  │ Clerk   │  │PostgreSQL│  │ PostHog     │ │
 │  │         │  │         │  │         │  │         │  │             │ │
 │  │Assist.  │  │Checkout │  │ Auth    │  │ Database│  │ Analytics   │ │
 │  │Threads  │  │ Webhooks│  │ Webhooks│  │ user_   │  │ Events      │ │
-│  │Runs     │  │         │  │         │  │ queries │  │             │ │
+│  │Runs     │  │         │  │         │  │queries  │  │             │ │
 │  └─────────┘  └─────────┘  └─────────┘  └─────────┘  └─────────────┘ │
 │                          ┌─────────┐                                     │
 │                          │ Resend  │                                     │
@@ -77,13 +77,13 @@
 ```
 User Upload PDF → Validate → Save to /tmp → pdf-parse extract
     → Create OpenAI Thread → Create Run → Poll → Get Message
-    → Update Appwrite Quota → Delete temp file → Return result
+    → Update PostgreSQL Quota → Delete temp file → Return result
 ```
 
 ### Payment Flow
 ```
 User clicks Purchase → Create Stripe Checkout Session → Redirect
-    → User pays on Stripe → Webhook fires → Update Appwrite quota
+    → User pays on Stripe → Webhook fires → Update PostgreSQL quota
     → User redirected to success page
 ```
 
@@ -123,7 +123,7 @@ User clicks Purchase → Create Stripe Checkout Session → Redirect
 | OpenAI | API Key via environment variable |
 | Stripe | API Key + Webhook signature verification |
 | Clerk | Publishable Key (client) + Secret Key (server) |
-| Appwrite | Project ID + Secret Key |
+| PostgreSQL | Connection String | `DATABASE_URL` |
 
 ---
 

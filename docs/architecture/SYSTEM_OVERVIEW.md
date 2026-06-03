@@ -43,7 +43,7 @@ graph TB
         OpenAI["OpenAI API<br/>Assistants + Threads"]
         Stripe["Stripe<br/>Checkout & Webhooks"]
         Clerk["Clerk<br/>Authentication"]
-        Appwrite["Appwrite<br/>Database"]
+        PostgreSQL_DB["PostgreSQL Database<br/>Prisma ORM"]
         PostHog["PostHog<br/>Analytics"]
         Resend["Resend<br/>Email"]
     end

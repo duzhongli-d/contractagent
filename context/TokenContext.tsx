@@ -35,7 +35,7 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
             setIsInitialized(true);
         }
 
-		// Poll for token updates every 10 seconds (replaces Appwrite realtime subscription)
+		// Poll for token updates every 10 seconds (via /api/tokens endpoint)
 		const intervalId = setInterval(fetchTokenCount, 10000);
 
 		return () => {
