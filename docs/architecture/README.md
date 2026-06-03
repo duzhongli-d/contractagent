@@ -164,7 +164,8 @@ contractagent/
 - [Clerk Authentication](https://clerk.com/docs)
 - [Stripe Checkout](https://stripe.com/docs/payments/checkout)
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants)
-- [Appwrite Database](https://appwrite.com/docs/databases)
+- [PostgreSQL Database](https://www.postgresql.org/docs/)
+- [Prisma ORM](https://www.prisma.io/docs)
 - [PostHog Analytics](https://posthog.com/docs)
 - [Resend Email](https://resend.com/docs)
 

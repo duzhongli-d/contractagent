@@ -12,7 +12,7 @@ This document provides a high-level system architecture diagram for LegalEdge AI
 - **Frontend:** Next.js 16 with TypeScript, App Router, Turbopack
 - **Backend:** Next.js Server Actions & API Routes
 - **Authentication:** Clerk (clerkMiddleware)
-- **Database:** Appwrite (user_queries collection)
+- **Database:** PostgreSQL with Prisma ORM (user_queries table)
 - **AI Processing:** OpenAI Assistants API (Threads & Runs)
 - **Payments:** Stripe Checkout
 - **Analytics:** PostHog
@@ -50,7 +50,7 @@ graph TB
 
     subgraph DataLayer["Data Layer"]
         PDFs["PDF Storage<br/>(/tmp - temp)"]
-        DB["Appwrite DB<br/>user_queries"]
+        DB["PostgreSQL DB<br/>user_queries"]
     end
 
     Browser --> LocaleRouter
@@ -67,17 +67,17 @@ graph TB
 
     ServerActions -->|1. Validate & Extract| PDFs
     ServerActions -->|2. AI Analysis| OpenAI
-    ServerActions -->|3. Update Quota| Appwrite
+    ServerActions -->|3. Update Quota| PostgreSQL
     ServerActions -->|4. Payment| Stripe
 
     APIRoutes -->|Webhook Handler| Stripe
-    APIRoutes -->|Token Sync| Appwrite
+    APIRoutes -->|Token Sync| PostgreSQL
     APIRoutes -->|User Signup| Clerk
 
     ServerActions -->|Analytics| PostHog
     ServerActions -->|Email| Resend
 
-    Appwrite --> DB
+    PostgreSQL --> DB
 ```
 
 ---
@@ -118,7 +118,7 @@ graph TB
 | **OpenAI** | Server Action | Thread creation, Run polling, Message retrieval |
 | **Stripe** | Server Action + API Route | Checkout sessions, Webhooks |
 | **Clerk** | Middleware + API Route | Auth, User signup events |
-| **Appwrite** | Server Action + API Route | User quota, Document tracking |
+| **PostgreSQL (Prisma)** | Server Action + API Route | User quota, Document tracking |
 | **PostHog** | Server Action | Analytics events (Document Analyzed, purchase) |
 | **Resend** | API Route | Email notifications |
 
@@ -131,7 +131,7 @@ graph LR
     subgraph Environment["Environment Variables"]
         OpenAIEnv["OPENAI_API_KEY<br/>OPENAI_ASSISTANT_ID<br/>OPENAI_PREMIUM_ASSISTANT_ID"]
         ClerkEnv["NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY<br/>CLERK_SECRET_KEY"]
-        AppwriteEnv["NEXT_PUBLIC_APPWRITE_*<br/>APPWRITE_SECRET_KEY"]
+        PostgreSQLEnv["DATABASE_URL<br/>(Prisma connection)"]
         StripeEnv["NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY<br/>STRIPE_SECRET_KEY<br/>STRIPE_WEBHOOK_SECRET"]
         PostHogEnv["NEXT_PUBLIC_POSTHOG_KEY<br/>NEXT_PUBLIC_POSTHOG_HOST"]
         ResendEnv["RESEND_API_KEY"]

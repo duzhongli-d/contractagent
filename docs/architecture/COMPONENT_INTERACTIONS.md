@@ -34,7 +34,7 @@ graph LR
         OpenAI_API["OpenAI API"]
         Stripe_API["Stripe API"]
         Clerk_API["Clerk Auth API"]
-        Appwrite_DB["Appwrite Database"]
+        PostgreSQL_DB["PostgreSQL Database"]
         PostHog_AN["PostHog Analytics"]
         Resend_Mail["Resend Email"]
     end
@@ -49,7 +49,7 @@ graph LR
     State -->|"quota update"| SPA
 
     Analyze -->|"thread.run|message"| OpenAI_API
-    Analyze -->|"update quota"| Appwrite_DB
+    Analyze -->|"update quota"| PostgreSQL_DB
     Analyze -->|"event", "event"| PostHog_AN
 
     StripeAction -->|"checkout.session"| Stripe_API
@@ -57,13 +57,13 @@ graph LR
 
     StripeWebhook -->|"webhook verification"| Stripe_API
     StripeWebhook -->|"read session"| Stripe_API
-    StripeWebhook -->|"update quota"| Appwrite_DB
+    StripeWebhook -->|"update quota"| PostgreSQL_DB
     StripeWebhook -->|"purchase event"| PostHog_AN
 
-    TokenAPI -->|"query quota"| Appwrite_DB
+    TokenAPI -->|"query quota"| PostgreSQL_DB
 
     UserSignup -->|"webhook"| Clerk_API
-    UserSignup -->|"create document"| Appwrite_DB
+    UserSignup -->|"create document"| PostgreSQL_DB
 ```
 
 ### Server Action Details
@@ -111,9 +111,9 @@ graph TB
         CU["currentUser()"]
     end
 
-    subgraph Appwrite_Integration["Appwrite Database"]
-        DB["user_queries<br/>collection"]
-        AD["createAdminClient()"]
+    subgraph PostgreSQL_Integration["PostgreSQL Database"]
+        DB["user_queries<br/>table"]
+        PR["Prisma Client"]
         QU["Query API"]
     end
 
@@ -133,15 +133,14 @@ graph TB
 
     AR2 -->|"user.created webhook"| CM
 
-    SA1 -->|"updateDocument"| DB
-    AR1 -->|"listDocuments|updateDocument"| DB
-    AR3 -->|"listDocuments"| DB
+    SA1 -->|"update"| PR
+    AR1 -->|"list|update"| PR
+    AR3 -->|"list"| PR
 
     SA1 -->|"capture()"| PH
     SA2 -->|"capture()"| PH
 
-    AD -->|"admin SDK"| DB
-    QU -->|"filter|equal"| DB
+    PR -->|"ORM"| DB
 
     RE -.->|"email notifications"| AR2
 ```
@@ -154,7 +153,7 @@ graph TB
 | **OpenAI Assistant** | Assistant ID | `OPENAI_ASSISTANT_ID`, `OPENAI_PREMIUM_ASSISTANT_ID` |
 | **Stripe** | API Key + Webhook Secret | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` |
 | **Clerk** | Publishable Key + Secret | `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY` |
-| **Appwrite** | Endpoint + Project ID + Secret | `NEXT_PUBLIC_APPWRITE_*`, `APPWRITE_SECRET_KEY` |
+| **PostgreSQL (Prisma)** | Connection String | `DATABASE_URL` |
 | **PostHog** | Project API Key | `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST` |
 | **Resend** | API Key | `RESEND_API_KEY` |
 
@@ -201,7 +200,7 @@ sequenceDiagram
     participant NextJS
     participant Clerk
     participant OpenAI
-    participant Appwrite
+    participant PostgreSQL
 
     User->>Browser: Select PDF file
     Browser->>NextJS: POST analyzeTXTContract(FormData)
@@ -253,7 +252,7 @@ sequenceDiagram
     participant NextJS
     participant Stripe
     participant Clerk
-    participant Appwrite
+    participant PostgreSQL
 
     User->>Browser: Click Purchase
     Browser->>NextJS: createCheckoutSession(formData)
@@ -277,11 +276,11 @@ sequenceDiagram
     NextJS->>Stripe: Retrieve session
     Stripe-->>NextJS: session details
 
-    NextJS->>Appwrite: Find user by client_reference_id
-    Appwrite-->>NextJS: userDoc
+    NextJS->>PostgreSQL: Find user by client_reference_id
+    PostgreSQL-->>NextJS: userRecord
 
-    NextJS->>Appwrite: Update document_quota_left += tokens
-    Appwrite-->>NextJS: updatedDoc
+    NextJS->>PostgreSQL: Update document_quota_left += tokens
+    PostgreSQL-->>NextJS: updatedRecord
 ```
 
 ---
@@ -310,10 +309,10 @@ graph TD
 
     Proxy --> Clerk_Ext["Clerk Auth"]
     analyzeAction --> OpenAI_Ext["OpenAI API"]
-    analyzeAction --> Appwrite_Ext["Appwrite DB"]
+    analyzeAction --> PostgreSQL_Ext["PostgreSQL DB"]
     stripeAction --> Stripe_Ext["Stripe API"]
     StripeWebhook --> Stripe_Ext
-    StripeWebhook --> Appwrite_Ext
+    StripeWebhook --> PostgreSQL_Ext
 ```
 
 ### Dependency Summary
@@ -322,11 +321,11 @@ graph TD
 |-----------|-------------|
 | `ContractUploader.tsx` | `TokenContext.tsx`, `analyzeContractsTXT.ts` (server action) |
 | `MarkdownRenderer.tsx` | `TokenContext.tsx` |
-| `TokenContext.tsx` | Appwrite API (via `/api/tokens`) |
+| `TokenContext.tsx` | PostgreSQL (via `/api/tokens`) |
 | `proxy.ts` (middleware) | Clerk API |
-| `analyzeContractsTXT.ts` | Clerk (auth), Appwrite, OpenAI, PostHog |
+| `analyzeContractsTXT.ts` | Clerk (auth), PostgreSQL, OpenAI, PostHog |
 | `stripe.ts` | Clerk (auth), Stripe, PostHog |
-| `webhooks/stripe/route.ts` | Stripe (webhook verification), Appwrite, PostHog |
+| `webhooks/stripe/route.ts` | Stripe (webhook verification), PostgreSQL, PostHog |
 
 ---
 

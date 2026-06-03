@@ -40,7 +40,7 @@ flowchart TD
     end
 
     subgraph Update["4. Quota Update Phase"]
-        Q["Update Appwrite document<br/>document_quota_left -= 1<br/>documents_analysed += 1"]
+        Q["Update PostgreSQL record<br/>document_quota_left -= 1<br/>documents_analysed += 1"]
         R{("Update success?")}
         R -->|No| S["Return update error"]
         R -->|Yes| T["Track PostHog event"]
@@ -72,14 +72,14 @@ flowchart TD
 | **Upload** | 2 | Client-side validation (type, size) | `ContractUploader.tsx` |
 | **Upload** | 3 | FormData sent to `analyzeTXTContract` server action | `analyzeContractsTXT.ts:48` |
 | **Validation** | 4 | Server re-validates file type/size | `analyzeContractsTXT.ts:79-91` |
-| **Validation** | 5 | Check user quota in Appwrite | `analyzeContractsTXT.ts:57-71` |
+| **Validation** | 5 | Check user quota in PostgreSQL | `analyzeContractsTXT.ts:57-71` |
 | **Storage** | 6 | Save file to `/tmp/{uuid}-{filename}` | `analyzeContractsTXT.ts:95-97` |
 | **Extraction** | 7 | `pdf-parse` extracts text from PDF | `analyzeContractsTXT.ts:99` |
 | **AI** | 8 | Create OpenAI thread | `analyzeContractsTXT.ts:102-113` |
 | **AI** | 9 | Create assistant run with `OPENAI_ASSISTANT_ID` | `analyzeContractsTXT.ts:118-120` |
 | **AI** | 10 | Poll run status (max 30 retries, exponential backoff) | `analyzeContractsTXT.ts:130-143` |
 | **AI** | 11 | Retrieve assistant response | `analyzeContractsTXT.ts:145-147` |
-| **Update** | 12 | Decrement `document_quota_left` in Appwrite | `analyzeContractsTXT.ts:150-153` |
+| **Update** | 12 | Decrement `document_quota_left` in PostgreSQL | `analyzeContractsTXT.ts:150-153` |
 | **Analytics** | 13 | PostHog `Document Analyzed` event | `analyzeContractsTXT.ts:162-171` |
 | **Cleanup** | 14 | Delete temp file from `/tmp` | `analyzeContractsTXT.ts:199-202` |
 | **Result** | 15 | Return response to client, revalidate path | `analyzeContractsTXT.ts:173-175` |
@@ -108,9 +108,9 @@ sequenceDiagram
     participant Browser
     participant NextJS
     participant Stripe
-    participant Appwrite
+    participant PostgreSQL
 
-    Note over User,Appwrite: Token Purchase Initiation
+    Note over User,PostgreSQL: Token Purchase Initiation
 
     User->>Browser: Navigate to /buytokens
     Browser->>NextJS: Render buytokens page
@@ -130,17 +130,17 @@ sequenceDiagram
     Note right of NextJS: Verify webhook signature
     NextJS->>Stripe: GET checkout.session/{id}
     Stripe->>NextJS: Return session details
-    NextJS->>Appwrite: Find user by clerk_user_id
-    NextJS->>Appwrite: Update document_quota_left
-    Appwrite->>NextJS: Confirm update
+    NextJS->>PostgreSQL: Find user by clerk_user_id
+    NextJS->>PostgreSQL: Update document_quota_left
+    PostgreSQL->>NextJS: Confirm update
     NextJS->>Stripe: Return 200 OK
 
     Note over User,Appwrite: Post-Purchase
 
     Stripe->>Browser: Redirect to /buytokens/success
     Browser->>NextJS: Request success page
-    NextJS->>Appwrite: Fetch updated quota
-    Appwrite->>NextJS: Return new quota
+    NextJS->>PostgreSQL: Fetch updated quota
+    PostgreSQL->>NextJS: Return new quota
     NextJS->>Browser: Render success page with new balance
 ```
 
@@ -156,7 +156,7 @@ sequenceDiagram
 | 6 | Stripe sends webhook to `/api/webhooks/stripe` | `route.ts` |
 | 7 | Webhook verifies signature | `route.ts` |
 | 8 | Webhook retrieves session details | Stripe API |
-| 9 | Webhook updates user quota in Appwrite | `route.ts` |
+| 9 | Webhook updates user quota in PostgreSQL | `route.ts` |
 | 10 | User redirected to success page | `/buytokens/success` |
 
 ### Discount Tiers
@@ -210,7 +210,7 @@ flowchart LR
 sequenceDiagram
     participant Stripe
     participant Webhook["Webhook Handler"]
-    participant Appwrite
+    participant PostgreSQL
     participant PostHog
 
     Stripe->>Webhook: POST checkout.session.completed
@@ -222,12 +222,12 @@ sequenceDiagram
     Webhook->>Webhook: Extract client_reference_id (userId)
     Webhook->>Webhook: Calculate token amount from metadata
 
-    Webhook->>Appwrite: Query user_queries collection
-    Note over Appwrite: Filter by clerk_user_id
-    Appwrite-->>Webhook: User document
+    Webhook->>PostgreSQL: Query user_queries table
+    Note over PostgreSQL: Filter by clerk_user_id
+    PostgreSQL-->>Webhook: User record
 
-    Webhook->>Appwrite: Update document_quota_left
-    Appwrite-->>Webhook: Updated document
+    Webhook->>PostgreSQL: Update document_quota_left
+    PostgreSQL-->>Webhook: Updated record
 
     Webhook->>PostHog: Capture 'purchase' event
     PostHog-->>Webhook: Event queued

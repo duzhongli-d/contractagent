@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { setUpTokensForFirstTimeUser } from "@/app/actions/tokens";
 import { Webhook } from 'svix';
 
-// This endpoint recieves webhook events from Clerk on user signup, and should set up the tokens for the user in the appwrite database
+// This endpoint receives webhook events from Clerk on user signup, and sets up tokens for the user in PostgreSQL
 interface ClerkWebhookBody {
     data: {
         id: string;

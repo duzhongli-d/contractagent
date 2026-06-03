@@ -14,7 +14,7 @@ AI-powered contract analysis SaaS. Upload PDF contracts and get instant legal in
 
 - **Framework**: Next.js 16 with App Router and TypeScript
 - **AI**: OpenAI Assistants API
-- **Database**: Appwrite
+- **Database**: PostgreSQL with Prisma ORM
 - **Auth**: Clerk
 - **Payments**: Stripe
 - **Analytics**: PostHog
@@ -52,12 +52,8 @@ OPENAI_PREMIUM_ASSISTANT_ID=
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
 CLERK_SECRET_KEY=
 
-# Appwrite
-NEXT_PUBLIC_APPWRITE_ENDPOINT=
-NEXT_PUBLIC_APPWRITE_PROJECT_ID=
-NEXT_PUBLIC_APPWRITE_DATABASE_ID=
-NEXT_PUBLIC_APPWRITE_COLLECTION_ID=
-APPWRITE_SECRET_KEY=
+# PostgreSQL (used by Prisma)
+DATABASE_URL=postgresql://user:password@localhost:5432/contractagent
 
 # Stripe
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=

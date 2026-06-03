@@ -61,9 +61,6 @@ config/
 context/
 └── TokenContext.tsx    # Client-side token quota state
 
-appwrite/
-└── config.ts           # Appwrite client setup
-
 hooks/
 └── useLocale.tsx       # Locale switching hook
 
@@ -103,7 +100,7 @@ Unauthenticated users are redirected to Clerk's sign-in page.
 2. **Text Extraction**: Server action `analyzeContractsTXT.ts` extracts text using `pdf-parse`
 3. **AI Processing**: OpenAI Assistants API analyzes the contract text (creates threads)
 4. **Display**: Results rendered via `MarkdownRenderer.tsx`
-5. **Token Deduction**: User's token quota decremented in Appwrite database
+5. **Token Deduction**: User's token quota decremented in PostgreSQL database
 
 Key files:
 - `app/actions/analyzeContractsTXT.ts` - Main analysis logic
@@ -115,19 +112,21 @@ Key files:
 - **Standard Query**: 1 token
 - **Premium Query**: 4 tokens
 - **Starting Quota**: 2 tokens for new users
-- **Payment Flow**: Stripe Checkout → Webhook (`/api/webhooks/stripe`) → Appwrite update
+- **Payment Flow**: Stripe Checkout → Webhook (`/api/webhooks/stripe`) → PostgreSQL update
 
 Key files:
 - `app/actions/stripe.ts` - Stripe integration
 - `app/api/webhooks/stripe/route.ts` - Payment webhook handler
 - `config/index.ts` - Pricing constants
 
-### Database Schema (Appwrite)
+### Database Schema (PostgreSQL with Prisma)
 
-**Collection: `user_queries`**
-- `clerk_user_id` (string) - Clerk user identifier
-- `document_quota_left` (int) - Remaining tokens
-- `documents_analysed` (int) - Total analyzed documents
+**Table: `UserQuery`**
+- `clerkUserId` (string) - Clerk user identifier (unique)
+- `documentQuotaLeft` (int) - Remaining tokens
+- `documentsAnalysed` (int) - Total analyzed documents
+- `createdAt` (timestamp) - Record creation time
+- `updatedAt` (timestamp) - Last update time
 
 ### Analytics (PostHog)
 
@@ -173,7 +172,7 @@ Architecture diagrams are maintained in `docs/architecture/`:
 Required in `.env.local`:
 - **OpenAI**: `OPENAI_API_KEY`, `OPENAI_ASSISTANT_ID`, `OPENAI_PREMIUM_ASSISTANT_ID`
 - **Clerk**: `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY`, `CLERK_SECRET_KEY`
-- **Appwrite**: `NEXT_PUBLIC_APPWRITE_ENDPOINT`, `NEXT_PUBLIC_APPWRITE_PROJECT_ID`, `NEXT_PUBLIC_APPWRITE_DATABASE_ID`, `NEXT_PUBLIC_APPWRITE_COLLECTION_ID`, `APPWRITE_SECRET_KEY`
+- **PostgreSQL**: `DATABASE_URL` (Prisma connection string)
 - **Stripe**: `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`
 - **PostHog**: `NEXT_PUBLIC_POSTHOG_KEY`, `NEXT_PUBLIC_POSTHOG_HOST`
 - **Resend**: `RESEND_API_KEY`
