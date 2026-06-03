@@ -9,7 +9,7 @@
 | Document | Description |
 |----------|-------------|
 | **[SYSTEM_OVERVIEW.md](./SYSTEM_OVERVIEW.md)** | High-level system architecture with Mermaid diagrams showing frontend, backend, external services, and route protection flow |
-| **[DATA_FLOW.md](./DATA_FLOW.md)** | Contract analysis pipeline and Stripe payment flow with detailed step-by-step sequences |
+| **[DATA_FLOW.md](./DATA_FLOW.md)** | Contract analysis pipeline and Alipay payment flow with detailed step-by-step sequences |
 | **[COMPONENT_INTERACTIONS.md](./COMPONENT_INTERACTIONS.md)** | C4-style component diagrams, external service integrations, and dependency relationships |
 
 ---
@@ -44,11 +44,9 @@
 │  SERVER ACTIONS  │    │     API ROUTES      │    │    CONTEXT          │
 │                 │    │                     │    │                     │
 │ • analyzeTXT    │    │ • /api/webhooks/    │    │ • TokenContext      │
-│   Contract      │    │   stripe            │    │   (client state)    │
-│ • createCheckout│    │ • /api/usersignup   │    │                     │
-│   Session       │    │ • /api/tokens       │    │                     │
-│ • createPayment │    │                     │    │                     │
-│   Intent        │    │                     │    │                     │
+│   Contract      │    │   alipay           │    │   (client state)    │
+│ • createAlipay  │    │ • /api/usersignup   │    │                     │
+│   Order         │    │ • /api/tokens       │    │                     │
 └────────┬────────┘    └──────────┬──────────┘    └─────────────────────┘
          │                         │
          │                         │
@@ -56,7 +54,7 @@
 ┌────────────────────────────────┴────────────────────────────────────────┐
 │                        EXTERNAL SERVICES                                │
 │  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────┐  ┌─────────────┐ │
-│  │ OpenAI  │  │ Stripe  │  │ Clerk   │  │PostgreSQL│  │ PostHog     │ │
+│  │ OpenAI  │  │ Alipay  │  │ Clerk   │  │PostgreSQL│  │ PostHog     │ │
 │  │         │  │         │  │         │  │         │  │             │ │
 │  │Assist.  │  │Checkout │  │ Auth    │  │ Database│  │ Analytics   │ │
 │  │Threads  │  │ Webhooks│  │ Webhooks│  │ user_   │  │ Events      │ │
@@ -82,8 +80,8 @@ User Upload PDF → Validate → Save to /tmp → pdf-parse extract
 
 ### Payment Flow
 ```
-User clicks Purchase → Create Stripe Checkout Session → Redirect
-    → User pays on Stripe → Webhook fires → Update PostgreSQL quota
+User clicks Purchase → Create Alipay Order → Redirect
+    → User pays on Alipay → Webhook fires → Update PostgreSQL quota
     → User redirected to success page
 ```
 
@@ -96,8 +94,8 @@ User clicks Purchase → Create Stripe Checkout Session → Redirect
 | `TOKENS_PER_QUERY` | 1 | Tokens consumed per standard analysis |
 | `TOKENS_PER_PREMIUM_QUERY` | 4 | Tokens consumed per premium analysis |
 | `START_TOKENS` | 2 | Initial tokens for new users |
-| `NOKPERTOKEN` | 2 | Price per token in Norwegian Kroner |
-| `CURRENCY` | `nok` | Stripe currency |
+| `CNYPERTOKEN` | 1 | Price per token in Chinese Yuan |
+| `CURRENCY` | `cny` | Alipay currency |
 | `MIN_AMOUNT` | 10.0 | Minimum purchase amount |
 | `MAX_AMOUNT` | 500.0 | Maximum purchase amount |
 
@@ -121,7 +119,7 @@ User clicks Purchase → Create Stripe Checkout Session → Redirect
 | Service | Security Method |
 |---------|----------------|
 | OpenAI | API Key via environment variable |
-| Stripe | API Key + Webhook signature verification |
+| Alipay | API Key + Webhook signature verification |
 | Clerk | Publishable Key (client) + Secret Key (server) |
 | PostgreSQL | Connection String | `DATABASE_URL` |
 
@@ -134,9 +132,9 @@ contractagent/
 ├── app/
 │   ├── actions/                    # Server Actions
 │   │   ├── analyzeContractsTXT.ts  # Contract analysis
-│   │   └── stripe.ts               # Stripe checkout
+│   │   └── alipay.ts               # Alipay checkout
 │   ├── api/                        # API Routes
-│   │   ├── webhooks/stripe/       # Stripe webhooks
+│   │   ├── webhooks/alipay/       # Alipay webhooks
 │   │   ├── usersignup/            # Clerk user signup
 │   │   └── tokens/                # Token quota API
 │   └── [locale]/                  # i18n pages
@@ -148,7 +146,7 @@ contractagent/
 ├── config/index.ts               # Configuration constants
 ├── context/TokenContext.tsx       # Token state management
 ├── proxy.ts                      # Clerk middleware
-├── lib/stripe.ts                 # Stripe client
+├── lib/alipay.ts                 # Alipay client
 ├── tests/                        # E2E Testing (Playwright)
 │   ├── setup.ts                  # Global test setup
 │   └── e2e/
@@ -168,7 +166,7 @@ contractagent/
 
 ### External Services Documentation
 - [Clerk Authentication](https://clerk.com/docs)
-- [Stripe Checkout](https://stripe.com/docs/payments/checkout)
+- [Alipay Checkout](https://opendocs.alipay.com/apis)
 - [OpenAI Assistants API](https://platform.openai.com/docs/assistants)
 - [PostgreSQL Database](https://www.postgresql.org/docs/)
 - [Prisma ORM](https://www.prisma.io/docs)
@@ -180,8 +178,8 @@ contractagent/
 |------|---------|
 | `proxy.ts` | Clerk middleware for route protection |
 | `app/actions/analyzeContractsTXT.ts` | Main contract analysis logic |
-| `app/actions/stripe.ts` | Stripe checkout session creation |
-| `app/api/webhooks/stripe/route.ts` | Stripe webhook handler |
+| `app/actions/alipay.ts` | Alipay checkout session creation |
+| `app/api/webhooks/alipay/route.ts` | Alipay webhook handler |
 | `config/index.ts` | Application constants |
 | `context/TokenContext.tsx` | Client-side token state |
 

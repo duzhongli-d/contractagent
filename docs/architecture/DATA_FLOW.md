@@ -100,14 +100,14 @@ flowchart TD
 
 ---
 
-## Payment Flow (Stripe Checkout)
+## Payment Flow (Alipay Checkout)
 
 ```mermaid
 sequenceDiagram
     participant User
     participant Browser
     participant NextJS
-    participant Stripe
+    participant Alipay
     participant PostgreSQL
 
     Note over User,PostgreSQL: Token Purchase Initiation
@@ -116,28 +116,28 @@ sequenceDiagram
     Browser->>NextJS: Render buytokens page
     User->>Browser: Select token package
     User->>Browser: Click "Purchase"
-    Browser->>NextJS: POST createCheckoutSession
-    NextJS->>Stripe: Create checkout session
-    Stripe->>NextJS: Return session (client_secret/url)
-    NextJS->>Browser: Return session data
-    Browser->>Stripe: Redirect to Stripe Checkout
-    User->>Stripe: Enter payment details
-    User->>Stripe: Confirm payment
+    Browser->>NextJS: POST createAlipayOrder
+    NextJS->>Alipay: Create payment order
+    Alipay->>NextJS: Return trade_no/payment_url
+    NextJS->>Browser: Return payment data
+    Browser->>Alipay: Redirect to Alipay WAP
+    User->>Alipay: Enter payment details
+    User->>Alipay: Confirm payment
 
     Note over User,PostgreSQL: Payment Processing
 
-    Stripe->>NextJS: POST /api/webhooks/stripe
+    Alipay->>NextJS: POST /api/webhooks/alipay
     Note right of NextJS: Verify webhook signature
-    NextJS->>Stripe: GET checkout.session/{id}
-    Stripe->>NextJS: Return session details
-    NextJS->>PostgreSQL: Find user by clerk_user_id
+    NextJS->>Alipay: GET trade_info
+    Alipay->>NextJS: Return trade details
+    NextJS->>PostgreSQL: Find user by out_trade_no
     NextJS->>PostgreSQL: Update document_quota_left
     PostgreSQL->>NextJS: Confirm update
-    NextJS->>Stripe: Return 200 OK
+    NextJS->>Alipay: Return 200 OK
 
     Note over User,PostgreSQL: Post-Purchase
 
-    Stripe->>Browser: Redirect to /buytokens/success
+    Alipay->>Browser: Redirect to /buytokens/success
     Browser->>NextJS: Request success page
     NextJS->>PostgreSQL: Fetch updated quota
     PostgreSQL->>NextJS: Return new quota
@@ -149,13 +149,13 @@ sequenceDiagram
 | Step | Action | File |
 |------|--------|------|
 | 1 | User selects token package on `/buytokens` page | `buytokens/page.tsx` |
-| 2 | User submits purchase form | Server action `createCheckoutSession` |
-| 3 | Server creates Stripe checkout session | `stripe.ts:24-51` |
-| 4 | User redirected to Stripe Checkout | Stripe hosted page |
-| 5 | User completes payment on Stripe | - |
-| 6 | Stripe sends webhook to `/api/webhooks/stripe` | `route.ts` |
+| 2 | User submits purchase form | Server action `createAlipayOrder` |
+| 3 | Server creates Alipay payment order | `alipay.ts:24-51` |
+| 4 | User redirected to Alipay WAP | Alipay hosted page |
+| 5 | User completes payment on Alipay | - |
+| 6 | Alipay sends webhook to `/api/webhooks/alipay` | `route.ts` |
 | 7 | Webhook verifies signature | `route.ts` |
-| 8 | Webhook retrieves session details | Stripe API |
+| 8 | Webhook retrieves trade details | Alipay API |
 | 9 | Webhook updates user quota in PostgreSQL | `route.ts` |
 | 10 | User redirected to success page | `/buytokens/success` |
 
@@ -167,16 +167,16 @@ sequenceDiagram
 | MEDIUM_VOLUME | 500+ | 10% |
 | HIGH_VOLUME | 1000+ | 15% |
 
-### Stripe Configuration Constants
+### Alipay Configuration Constants
 
 ```typescript
-CURRENCY = 'nok'
-MIN_AMOUNT = 10.0 NOK
-MAX_AMOUNT = 500.0 NOK
-AMOUNT_STEP = 2.0 NOK
+CURRENCY = 'cny'
+MIN_AMOUNT = 10.0 CNY
+MAX_AMOUNT = 500.0 CNY
+AMOUNT_STEP = 2.0 CNY
 TOKENS_PER_QUERY = 1
 TOKENS_PER_PREMIUM_QUERY = 4
-NOKPERTOKEN = 2
+CNYPERTOKEN = 1
 START_TOKENS = 2
 ```
 
@@ -208,19 +208,19 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant Stripe
+    participant Alipay
     participant Webhook["Webhook Handler"]
     participant PostgreSQL
     participant PostHog
 
-    Stripe->>Webhook: POST checkout.session.completed
-    Note over Webhook: Verify STRIPE_WEBHOOK_SECRET
+    Alipay->>Webhook: POST trade_status = TRADE_SUCCESS
+    Note over Webhook: Verify ALIPAY_ALIPAY_PUBLIC_KEY
 
-    Webhook->>Stripe: GET /v1/checkout/sessions/{id}
-    Stripe-->>Webhook: Session details
+    Webhook->>Alipay: GET alipay.trade.page.pay
+    Alipay-->>Webhook: Trade details
 
-    Webhook->>Webhook: Extract client_reference_id (userId)
-    Webhook->>Webhook: Calculate token amount from metadata
+    Webhook->>Webhook: Extract out_trade_no (userId)
+    Webhook->>Webhook: Calculate token amount from passback_params
 
     Webhook->>PostgreSQL: Query user_queries table
     Note over PostgreSQL: Filter by clerk_user_id
@@ -232,7 +232,7 @@ sequenceDiagram
     Webhook->>PostHog: Capture 'purchase' event
     PostHog-->>Webhook: Event queued
 
-    Webhook->>Stripe: HTTP 200 (success)
+    Webhook->>Alipay: HTTP 200 (success)
 ```
 
 ---
@@ -242,8 +242,8 @@ sequenceDiagram
 | Flow | Key Files |
 |------|-----------|
 | Contract Analysis | `app/actions/analyzeContractsTXT.ts` |
-| Payment Creation | `app/actions/stripe.ts` |
-| Webhook Handler | `app/api/webhooks/stripe/route.ts` |
+| Payment Creation | `app/actions/alipay.ts` |
+| Webhook Handler | `app/api/webhooks/alipay/route.ts` |
 | Token API | `app/api/tokens/route.ts` |
 | User Signup | `app/api/usersignup/route.ts` |
 
@@ -298,7 +298,7 @@ flowchart TD
 | **Authentication** | `auth.spec.ts` | Sign-in flow, sign-out, protected route access |
 | **Navigation** | `navigation.spec.ts` | Locale switching, page routing, redirects |
 | **Contract Analysis** | `contract-analysis.spec.ts` | PDF upload, analysis trigger, result display |
-| **Token Purchase** | `token-purchase.spec.ts` | Token selection, Stripe checkout, success page |
+| **Token Purchase** | `token-purchase.spec.ts` | Token selection, Alipay checkout, success page |
 | **Contact** | `contact.spec.ts` | Form validation, submission |
 
 ### E2E Test File Structure
