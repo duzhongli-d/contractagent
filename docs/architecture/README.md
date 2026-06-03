@@ -149,6 +149,12 @@ contractagent/
 ├── context/TokenContext.tsx       # Token state management
 ├── proxy.ts                      # Clerk middleware
 ├── lib/stripe.ts                 # Stripe client
+├── tests/                        # E2E Testing (Playwright)
+│   ├── setup.ts                  # Global test setup
+│   └── e2e/
+│       ├── pages/                # Page Object Models
+│       └── *.spec.ts             # Test specifications
+├── playwright.config.ts          # Playwright configuration
 ├── docs/architecture/            # This documentation
 │   ├── README.md                 # This file
 │   ├── SYSTEM_OVERVIEW.md        # System overview

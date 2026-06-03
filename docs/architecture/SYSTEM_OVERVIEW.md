@@ -17,6 +17,7 @@ This document provides a high-level system architecture diagram for LegalEdge AI
 - **Payments:** Stripe Checkout
 - **Analytics:** PostHog
 - **Email:** Resend
+- **E2E Testing:** Playwright (Page Object Model pattern)
 
 ---
 
@@ -53,6 +54,13 @@ graph TB
         DB["PostgreSQL DB<br/>user_queries"]
     end
 
+    subgraph TestingLayer["Testing Layer"]
+        Playwright["Playwright Test Runner"]
+        POM["Page Objects<br/>HomePage, LiveAnalyserPage<br/>BuytokensPage, AuthPage<br/>ContactPage"]
+        Specs["Test Specs<br/>auth, navigation<br/>contract-analysis<br/>token-purchase, contact"]
+        CI_CD["GitHub Actions<br/>e2e.yml workflow"]
+    end
+
     Browser --> LocaleRouter
     LocaleRouter --> Middleware
 
@@ -78,6 +86,11 @@ graph TB
     ServerActions -->|Email| Resend
 
     PostgreSQL --> DB
+
+    Browser -.->|"E2E Tests"| Playwright
+    Playwright -->|"Page Objects"| Components
+    Specs -->|"Test assertions"| Components
+    Playwright -->|"CI Pipeline"| CI_CD
 ```
 
 ---
@@ -121,6 +134,16 @@ graph TB
 | **PostgreSQL (Prisma)** | Server Action + API Route | User quota, Document tracking |
 | **PostHog** | Server Action | Analytics events (Document Analyzed, purchase) |
 | **Resend** | API Route | Email notifications |
+
+### E2E Testing
+
+| Component | Purpose |
+|-----------|---------|
+| **playwright.config.ts** | Playwright test configuration (browsers, reporters, CI) |
+| **tests/setup.ts** | Global test setup and fixtures |
+| **tests/e2e/pages/*.ts** | Page Object Model classes (HomePage, LiveAnalyserPage, BuytokensPage, AuthPage, ContactPage) |
+| **tests/e2e/*.spec.ts** | Test specifications (auth, navigation, contract-analysis, token-purchase, contact) |
+| **.github/workflows/e2e.yml** | GitHub Actions CI workflow for automated testing |
 
 ---
 
@@ -192,6 +215,17 @@ contractagent/
 ├── lib/
 │   ├── stripe.ts                    # Stripe client initialization
 │   └── i18n/                        # Internationalization
+├── tests/                           # E2E Testing
+│   ├── setup.ts                     # Global test setup
+│   └── e2e/
+│       ├── pages/                   # Page Object Models
+│       │   ├── HomePage.ts
+│       │   ├── LiveAnalyserPage.ts
+│       │   ├── BuytokensPage.ts
+│       │   ├── AuthPage.ts
+│       │   └── ContactPage.ts
+│       └── *.spec.ts                # Test specifications
+├── playwright.config.ts            # Playwright configuration
 └── docs/
     └── architecture/
         └── SYSTEM_OVERVIEW.md       # This document

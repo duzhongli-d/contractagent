@@ -249,4 +249,88 @@ sequenceDiagram
 
 ---
 
+## E2E Testing Flow
+
+```mermaid
+flowchart TD
+    subgraph TestRunner["Playwright Test Runner"]
+        Config["playwright.config.ts<br/>baseURL, browsers, reporters"]
+        Setup["tests/setup.ts<br/>Global fixtures"]
+    end
+
+    subgraph TestSpecs["Test Specifications"]
+        Auth["auth.spec.ts<br/>Sign-in, sign-out, protected routes"]
+        Nav["navigation.spec.ts<br/>Locale switching, page routing"]
+        Analysis["contract-analysis.spec.ts<br/>PDF upload, analysis display"]
+        Purchase["token-purchase.spec.ts<br/>Checkout flow, success page"]
+        Contact["contact.spec.ts<br/>Form submission"]
+    end
+
+    subgraph PageObjects["Page Object Model"]
+        HomePage["HomePage.ts<br/>locators, navigation methods"]
+        LiveAnalyserPage["LiveAnalyserPage.ts<br/>upload, analysis methods"]
+        BuytokensPage["BuytokensPage.ts<br/>token selection, purchase"]
+        AuthPage["AuthPage.ts<br/>sign-in, sign-up methods"]
+        ContactPage["ContactPage.ts<br/>form methods"]
+    end
+
+    subgraph CI["CI/CD Pipeline"]
+        GHA["GitHub Actions<br/>e2e.yml workflow"]
+        Report["HTML Report<br/>playwright-report/"]
+        Artifacts["Screenshots<br/>Traces on failure"]
+    end
+
+    Config --> TestSpecs
+    Setup --> TestSpecs
+    TestSpecs --> PageObjects
+    PageObjects -->|"Interacts with"| Browser["Browser Instance"]
+    Browser --> NextJS_App["Next.js App<br/>(localhost:3000)"]
+
+    TestSpecs -->|"On failure"| Artifacts
+    TestSpecs -->|"CI run"| GHA
+    GHA --> Report
+```
+
+### Test Categories
+
+| Category | File | Coverage |
+|----------|------|----------|
+| **Authentication** | `auth.spec.ts` | Sign-in flow, sign-out, protected route access |
+| **Navigation** | `navigation.spec.ts` | Locale switching, page routing, redirects |
+| **Contract Analysis** | `contract-analysis.spec.ts` | PDF upload, analysis trigger, result display |
+| **Token Purchase** | `token-purchase.spec.ts` | Token selection, Stripe checkout, success page |
+| **Contact** | `contact.spec.ts` | Form validation, submission |
+
+### E2E Test File Structure
+
+```
+tests/
+├── setup.ts                      # Global setup (baseURL, fixtures)
+└── e2e/
+    ├── pages/
+    │   ├── HomePage.ts           # Homepage POM
+    │   ├── LiveAnalyserPage.ts   # Analysis page POM
+    │   ├── BuytokensPage.ts     # Purchase page POM
+    │   ├── AuthPage.ts           # Authentication POM
+    │   └── ContactPage.ts        # Contact page POM
+    ├── auth.spec.ts              # Authentication tests
+    ├── navigation.spec.ts        # Navigation tests
+    ├── contract-analysis.spec.ts # Contract analysis tests
+    ├── token-purchase.spec.ts    # Token purchase tests
+    └── contact.spec.ts           # Contact form tests
+```
+
+### Playwright Configuration
+
+| Setting | Value | Purpose |
+|---------|-------|---------|
+| `testDir` | `./tests/e2e` | Test specification location |
+| `baseURL` | `http://localhost:3000` | Application under test |
+| `browser` | Chromium | Target browser for tests |
+| `reporter` | HTML (+ GitHub on CI) | Test output format |
+| `retries` | 2 (CI) / 0 (local) | Failure retry policy |
+| `webServer` | `npm run dev` | Auto-start dev server |
+
+---
+
 *Document generated for LegalEdge AI technical architecture*

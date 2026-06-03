@@ -122,6 +122,12 @@ graph TB
         RE["Resend"]
     end
 
+    subgraph Testing["E2E Testing"]
+        PW["Playwright Test Runner"]
+        POM["Page Objects"]
+        SPEC["Test Specifications"]
+    end
+
     SA1 -->|"create thread|run|message"| OA
     OA --> OT --> OR --> OM
 
@@ -143,6 +149,9 @@ graph TB
     PR -->|"ORM"| DB
 
     RE -.->|"email notifications"| AR2
+
+    PW -.->|"E2E tests"| NextJSApp
+    SPEC -.->|"assertions"| NextJSApp
 ```
 
 ### Integration Authentication Methods
@@ -326,6 +335,7 @@ graph TD
 | `analyzeContractsTXT.ts` | Clerk (auth), PostgreSQL, OpenAI, PostHog |
 | `stripe.ts` | Clerk (auth), Stripe, PostHog |
 | `webhooks/stripe/route.ts` | Stripe (webhook verification), PostgreSQL, PostHog |
+| **E2E Tests** | Playwright, Page Objects, Next.js app (baseURL) |
 
 ---
 
