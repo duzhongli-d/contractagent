@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { setUpTokensForFirstTimeUser } from "@/app/actions/tokens";
 import { Webhook } from 'svix';
 

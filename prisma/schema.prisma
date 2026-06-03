@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserQuota {
+  clerk_user_id       String   @id @map("clerk_user_id")
+  document_quota_left Int      @default(2) @map("document_quota_left")
+  documents_analysed  Int      @default(0) @map("documents_analysed")
+  created_at          DateTime @default(now()) @map("created_at")
+  updated_at          DateTime @updatedAt @map("updated_at")
+
+  @@map("user_queries")
+}

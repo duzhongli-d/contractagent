@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useUser } from '@clerk/nextjs';
-import { Client } from 'appwrite';
 
 type TokenContextType = {
 	tokenCount: number | null;
@@ -17,39 +16,30 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
     const [isInitialized, setIsInitialized] = useState(false);
 
 	const fetchTokenCount = async () => {
-		const res = await fetch('/api/tokens');
-		const data = await res.json();
-		setTokenCount(data.tokens);
+		try {
+			const res = await fetch('/api/tokens');
+			const data = await res.json();
+			setTokenCount(data.tokens);
+		} catch (error) {
+			console.error('Failed to fetch token count:', error);
+		}
 	};
 
 	useEffect(() => {
 		if (!isLoaded || !isSignedIn) {
             return;
-        };
+        }
 
         if (!isInitialized) {
             fetchTokenCount();
             setIsInitialized(true);
         }
-		// fetchTokenCount();
 
-		// Realtime setup
-		const client = new Client()
-			.setEndpoint(process.env.NEXT_PUBLIC_APPWRITE_ENDPOINT!)
-			.setProject(process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID!);
-        const eventString = `databases.${process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID}.collections.${process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID}.documents`;
-		const unsubscribe = client.subscribe(
-			eventString,
-			response => {
-				const doc = response.payload as { clerk_user_id: string; document_quota_left: number };
-				if (doc.clerk_user_id === user.id) {
-					setTokenCount(doc.document_quota_left);
-				}
-			},
-		);
+		// Poll for token updates every 10 seconds (replaces Appwrite realtime subscription)
+		const intervalId = setInterval(fetchTokenCount, 10000);
 
 		return () => {
-            unsubscribe();   
+            clearInterval(intervalId);
 		};
 	}, [isLoaded, user, isInitialized]);
 

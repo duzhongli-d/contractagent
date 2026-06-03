@@ -1,9 +1,11 @@
-import PostHog from 'posthog-js';
+import { PostHog } from 'posthog-node';
 
-const PostHogClient = () => {
-	return PostHog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY || '', {
-		api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
-	});
-};
+const client = new PostHog(process.env.NEXT_PUBLIC_POSTHOG_KEY || '', {
+    host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
+    flushAt: 20,
+    flushInterval: 10000,
+});
+
+const PostHogClient = () => client;
 
 export default PostHogClient;

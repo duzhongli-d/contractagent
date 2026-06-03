@@ -4,10 +4,9 @@ import { writeFile, readFile, unlink } from 'fs/promises';
 import path from 'path';
 import { randomUUID } from 'crypto';
 import pdfParse from 'pdf-parse';
-import { createAdminClient } from '@/appwrite/config';
+import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { currentUser } from '@clerk/nextjs/server';
-import { Query } from 'node-appwrite';
 import { TOKENS_PER_QUERY } from '@/config';
 import PostHogClient from '@/posthog';
 import { openai } from '@/openai';
@@ -15,9 +14,6 @@ import { openai } from '@/openai';
 // Constants for file validation
 const ALLOWED_FILE_TYPES = ['application/pdf'];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB in bytes
-
-const dbId = process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string;
-const collectionId = process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_ID as string;
 
 // Doing this because pdf-parse is not maintained and the types are not up to date
 interface ExtractTextFromPDF {
@@ -47,22 +43,17 @@ const extractTextFromPDF: ExtractTextFromPDF = async (filePath: string): Promise
 
 export async function analyzeTXTContract(formData:FormData) {
 
-    // check if the user has any document_quota_left before proceeding, needs to check in the appwrite database based on the users clerk id
+    // check if the user has any document_quota_left before proceeding, needs to check in the database based on the users clerk id
     // if the user has no document_quota_left, return an error message to the user and redirect them to the payment page
     const user = await currentUser();
     const userId = user?.id;
     if (!userId) {
         return { error: 'User ID is missing' };
     }
-    const { databases } = await createAdminClient();
 
-    const getUserQuotaObject = async () => {
-        const userQuota = await databases.listDocuments(dbId, collectionId, [
-            Query.equal('clerk_user_id', [userId as string]),
-        ]);
-        return userQuota.documents[0];
-    }
-    const userQuota = await getUserQuotaObject();
+    const userQuota = await prisma.userQuota.findUnique({
+        where: { clerk_user_id: userId },
+    });
     if (!userQuota) {
         return { data: null, error: 'User quota not found.' };
     }
@@ -146,10 +137,13 @@ export async function analyzeTXTContract(formData:FormData) {
 
         const responseObj = messages.data.filter((msg: any) => msg.role === 'assistant');
 
-        // We need to update the user's document_quota_left in the appwrite database as well as increment documents_analysed field
-        const updatedUserQueryObj = await databases.updateDocument(dbId, collectionId, userQuota.$id, {
-            document_quota_left: userQuota.document_quota_left - TOKENS_PER_QUERY,
-            documents_analysed: userQuota.documents_analysed + 1,
+        // We need to update the user's document_quota_left in the database as well as increment documents_analysed field
+        const updatedUserQueryObj = await prisma.userQuota.update({
+            where: { clerk_user_id: userId },
+            data: {
+                document_quota_left: { decrement: TOKENS_PER_QUERY },
+                documents_analysed: { increment: 1 },
+            },
         });
 
         // Verify the update was successful
