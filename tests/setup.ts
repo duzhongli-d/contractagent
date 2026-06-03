@@ -5,11 +5,19 @@ type MyFixtures = {
 };
 
 export const test = base.extend<MyFixtures>({
-  // Authenticated page fixture - TODO: Implement Clerk authentication fixture
-  // Will use Clerk test helpers or cookie injection
+  // Auth.js authenticated page fixture
+  // Signs in via the /en/signin page
   authenticatedPage: async ({ page, baseURL }, use) => {
-    // Placeholder: authenticated page fixture
-    // Will be implemented after Clerk test setup is configured
+    const signIn = async (email: string, password: string) => {
+      await page.goto('/en/signin');
+      await page.getByLabel(/email/i).fill(email);
+      await page.getByLabel(/password/i).fill(password);
+      await page.getByRole('button', { name: /sign in/i }).click();
+      await page.waitForURL(/\/liveAnalyser/);
+    };
+
+    // Store the signIn function on the page for use in tests
+    (page as any).authSignIn = signIn;
     await use(page);
   },
 });

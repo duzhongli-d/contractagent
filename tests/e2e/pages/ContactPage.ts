@@ -8,19 +8,19 @@ export class ContactPage {
   }
 
   get firstNameInput() {
-    return this.page.getByLabel(/first name/i);
+    return this.page.locator('#firstName');
   }
 
   get lastNameInput() {
-    return this.page.getByLabel(/last name/i);
+    return this.page.locator('#lastName');
   }
 
   get emailInput() {
-    return this.page.getByLabel(/email/i);
+    return this.page.locator('#email');
   }
 
   get messageTextarea() {
-    return this.page.getByLabel(/message/i);
+    return this.page.locator('#message');
   }
 
   get sendButton() {

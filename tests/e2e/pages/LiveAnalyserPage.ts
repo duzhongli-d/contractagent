@@ -8,7 +8,7 @@ export class LiveAnalyserPage {
   }
 
   get disclaimerModal() {
-    return this.page.locator('[data-testid="disclaimer-modal"]');
+    return this.page.locator('[role="dialog"]');
   }
 
   get fileInput() {
@@ -20,7 +20,10 @@ export class LiveAnalyserPage {
   }
 
   async acceptDisclaimer() {
-    await this.page.getByRole('button', { name: /accept|i agree/i }).click();
+    // Click the checkbox label to check it (works across locales)
+    await this.page.locator('label[for="agree"]').click();
+    // Then click the accept button
+    await this.page.getByRole('button', { name: /godta og fortsett|accept and continue|accept/i }).click();
   }
 
   async uploadPdf(filePath: string) {
