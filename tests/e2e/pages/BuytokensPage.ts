@@ -8,15 +8,25 @@ export class BuytokensPage {
   }
 
   get tokenSlider() {
-    return this.page.locator('input[type="range"]');
+    return this.page.locator('[data-slot="slider"]');
   }
 
   get checkoutButton() {
-    return this.page.getByRole('button', { name: /checkout|stripe/i });
+    return this.page.getByRole('button', { name: /alipay|pay with|使用支付宝|betal med/i });
+  }
+
+  get tokenInput() {
+    return this.page.locator('input[type="number"]').first();
   }
 
   async setTokenCount(count: number) {
-    await this.tokenSlider.fill(String(count));
+    // Use the number input field
+    await this.tokenInput.fill(String(count));
+    await this.tokenInput.blur();
+  }
+
+  async clickPresetAmount(amount: number) {
+    await this.page.getByRole('button', { name: String(amount), exact: true }).click();
   }
 
   get discountBadge() {

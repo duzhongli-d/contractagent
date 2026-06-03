@@ -15,7 +15,13 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: undefined,
+        launchOptions: {
+          executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+        },
+      },
     },
   ],
   webServer: process.env.CI
