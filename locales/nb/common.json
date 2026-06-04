@@ -6,7 +6,9 @@
     "buyTokens": "Kjøp Tokens",
     "contact": "Kontakt",
     "signIn": "Logg inn",
-    "signUp": "Registrer"
+    "signUp": "Registrer",
+    "signOut": "Logg ut",
+    "openMenu": "Åpne meny"
   },
   "hero": {
     "title": "AI-drevet juridisk kontraktsanalyse",
