@@ -30,5 +30,9 @@ export default defineConfig({
         command: 'npm run dev',
         url: 'http://localhost:3000',
         reuseExistingServer: !process.env.CI,
+        env: {
+          AUTH_SANDBOX: 'true',
+          NEXT_PUBLIC_AUTH_SANDBOX: 'true',
+        },
       },
 });

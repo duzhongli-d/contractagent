@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 const isSandbox = process.env.AUTH_SANDBOX === "true";
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: isSandbox ? undefined : PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -55,6 +55,32 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
               };
             },
           }),
+          // Test credentials provider for E2E testing
+          CredentialsProvider({
+            id: "test-credentials",
+            name: "Test User",
+            credentials: {
+              email: { label: "Email", type: "text" },
+              password: { label: "Password", type: "password" },
+            },
+            async authorize(credentials) {
+              // Only allow in test/sandbox mode
+              if (!isSandbox) return null;
+              // Accept test@test.com / password123 for E2E tests
+              if (
+                credentials?.email === "test@test.com" &&
+                credentials?.password === "password123"
+              ) {
+                return {
+                  id: "test_user_id",
+                  name: "Test User",
+                  email: "test@test.com",
+                  image: null,
+                };
+              }
+              return null;
+            },
+          }),
         ]
       : []),
   ],
@@ -63,14 +89,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     error: "/en/error",
   },
   session: {
-    strategy: "database",
+    strategy: isSandbox ? "jwt" : "database",
   },
   callbacks: {
-    async session({ session, user }) {
-      if (session.user && user) {
-        session.user.id = user.id;
+    async session({ session, user, token }) {
+      if (session.user) {
+        // For JWT sessions, use the token's sub; for database sessions, use user.id
+        if (isSandbox && token?.sub) {
+          session.user.id = token.sub;
+        } else if (user?.id) {
+          session.user.id = user.id;
+        }
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.sub = user.id;
+      }
+      return token;
     },
   },
 });

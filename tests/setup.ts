@@ -6,18 +6,17 @@ type MyFixtures = {
 
 export const test = base.extend<MyFixtures>({
   // Auth.js authenticated page fixture
-  // Signs in via the /en/signin page
+  // Signs in via the Test User sandbox provider for E2E testing
   authenticatedPage: async ({ page, baseURL }, use) => {
-    const signIn = async (email: string, password: string) => {
-      await page.goto('/en/signin');
-      await page.getByLabel(/email/i).fill(email);
-      await page.getByLabel(/password/i).fill(password);
-      await page.getByRole('button', { name: /sign in/i }).click();
-      await page.waitForURL(/\/liveAnalyser/);
-    };
+    // Navigate to signin page (sandbox providers visible when NEXT_PUBLIC_AUTH_SANDBOX=true)
+    await page.goto('/en/signin');
 
-    // Store the signIn function on the page for use in tests
-    (page as any).authSignIn = signIn;
+    // Click the "Test User" button in the sandbox section
+    await page.getByRole('button', { name: /test user/i }).click();
+
+    // Wait for redirect to liveAnalyser
+    await page.waitForURL(/\/liveAnalyser/, { timeout: 10000 });
+
     await use(page);
   },
 });
