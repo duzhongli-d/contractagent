@@ -1,12 +1,13 @@
 import { auth } from "@/auth";
 import { NextResponse } from "next/server";
 
-export default auth(async function middleware(req, session) {
+export default auth(async function middleware(req) {
   const pathname = req.nextUrl.pathname;
+  const session = req.auth;
 
-  // Define protected routes
+  // Define protected routes - use includes() to match locale-prefixed paths like /nb/liveAnalyser
   const isProtectedRoute =
-    pathname.startsWith("/liveAnalyser") || pathname.startsWith("/buytokens");
+    pathname.includes("/liveAnalyser") || pathname.includes("/buytokens");
 
   // Redirect to sign-in if accessing protected route without session
   if (!session && isProtectedRoute) {
