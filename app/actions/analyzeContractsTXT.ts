@@ -6,7 +6,7 @@ import { randomUUID } from 'crypto';
 import pdfParse from 'pdf-parse';
 import { prisma } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
-import { currentUser } from '@clerk/nextjs/server';
+import { auth } from '@/auth';
 import { TOKENS_PER_QUERY } from '@/config';
 import PostHogClient from '@/posthog';
 import { openai } from '@/openai';
@@ -43,10 +43,10 @@ const extractTextFromPDF: ExtractTextFromPDF = async (filePath: string): Promise
 
 export async function analyzeTXTContract(formData:FormData) {
 
-    // check if the user has any document_quota_left before proceeding, needs to check in the database based on the users clerk id
+    // check if the user has any document_quota_left before proceeding, needs to check in the database based on the users id
     // if the user has no document_quota_left, return an error message to the user and redirect them to the payment page
-    const user = await currentUser();
-    const userId = user?.id;
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
         return { error: 'User ID is missing' };
     }

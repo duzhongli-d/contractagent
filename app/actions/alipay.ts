@@ -2,7 +2,7 @@
 
 import { getAlipaySdk } from '@/lib/alipay';
 import { CNY_PER_TOKEN } from '@/config';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/auth';
 import { redirect } from 'next/navigation';
 
 interface CreateOrderData {
@@ -12,7 +12,8 @@ interface CreateOrderData {
 
 export async function createAlipayOrder(data: CreateOrderData): Promise<{ success: boolean; payUrl?: string; error?: string }> {
   try {
-    const { userId } = await auth();
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
       return { success: false, error: 'User not authenticated' };
     }

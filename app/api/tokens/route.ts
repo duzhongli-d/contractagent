@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/db';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/auth';
 import { setUpTokensForFirstTimeUser } from '@/app/actions/tokens';
 import { START_TOKENS } from '@/config';
 
 export async function GET() {
-	const { userId } = await auth();
+	const session = await auth();
+	const userId = session?.user?.id;
 	try {
 		if (!userId) {
 			return NextResponse.json({ error: 'User ID is missing' }, { status: 400 });

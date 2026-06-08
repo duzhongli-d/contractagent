@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useUser } from '@clerk/nextjs';
+import { useSession } from 'next-auth/react';
 
 type TokenContextType = {
 	tokenCount: number | null;
@@ -11,7 +11,7 @@ type TokenContextType = {
 const TokenContext = createContext<TokenContextType | undefined>(undefined);
 
 export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
-	const { user, isLoaded, isSignedIn } = useUser();
+	const { data: session, status } = useSession();
 	const [tokenCount, setTokenCount] = useState<number | null>(null);
     const [isInitialized, setIsInitialized] = useState(false);
 
@@ -26,7 +26,11 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 	};
 
 	useEffect(() => {
-		if (!isLoaded || !isSignedIn) {
+		if (status === 'loading') {
+            return;
+        }
+
+        if (status !== 'authenticated') {
             return;
         }
 
@@ -41,7 +45,7 @@ export const TokenProvider = ({ children }: { children: React.ReactNode }) => {
 		return () => {
             clearInterval(intervalId);
 		};
-	}, [isLoaded, user, isInitialized]);
+	}, [status, session, isInitialized]);
 
 	return (
 		<TokenContext.Provider value={{ tokenCount, refresh: fetchTokenCount }}>

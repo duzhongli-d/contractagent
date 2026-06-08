@@ -5,7 +5,7 @@ import { headers } from 'next/headers';
 import { CURRENCY, MIN_AMOUNT } from '@/config';
 import { formatAmountForStripe } from '@/utils/stripeHelpers';
 import { stripe } from '@/lib/stripe';
-import { auth } from '@clerk/nextjs/server';
+import { auth } from '@/auth';
 import PostHogClient from '@/posthog';
 
 export async function createCheckoutSession(
@@ -19,7 +19,8 @@ export async function createCheckoutSession(
 
 	const origin: string = (await headers()).get('origin') as string;
 
-	const { userId } = (await auth()) || { userId: null };
+	const session = await auth();
+	const userId = session?.user?.id;
 
 	const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create({
 		mode: 'payment',
